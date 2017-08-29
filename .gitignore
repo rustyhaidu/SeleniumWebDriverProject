@@ -1,0 +1,16 @@
+#Eclipse project files
+.classpath
+.project
+.settings
+
+# IntelliJ project files
+*.iml
+.idea
+
+#binary directories
+bin
+target
+lib
+
+#other
+test-output
