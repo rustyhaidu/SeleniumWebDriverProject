@@ -37,8 +37,6 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
         productPage.getAddToCartButton().click();
 
-
-
         /*categoryPage.getCartTotalButton().click();*/
 
 
