@@ -13,6 +13,18 @@ public class HomePage {
     @FindBy(how = How.PARTIAL_LINK_TEXT, using = "Cameras")
     private WebElement camerasCategory;
 
+    @FindBy(how = How.XPATH, using = "//*[@id=\"cart\"]")
+    private WebElement cartTotalButton;
+
+
+    public WebElement getCartTotalButton() {
+        return cartTotalButton;
+    }
+
+    public void setCartTotalButton(WebElement cartTotalButton) {
+        this.cartTotalButton = cartTotalButton;
+    }
+
     public WebElement getPhonesAndPdaCategory() {
         return phonesAndPdaCategory;
     }
