@@ -18,9 +18,10 @@ public class BaseTest {
     @BeforeMethod
     public void driver() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
+
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("start-maximized");
+        driver = new ChromeDriver(chromeOptions);
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://shop-tausandbox.rhcloud.com");
