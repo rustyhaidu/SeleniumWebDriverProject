@@ -63,12 +63,14 @@ public class BaseTest {
         List<String> nameList = new ArrayList<>();
         List<WebElement> anchors = driver.findElements(By.tagName("a"));
         Iterator<WebElement> i = anchors.iterator();
-
+       // String anchorName;
+        String anchorAttribute;
         while (i.hasNext()) {
             WebElement anchor = i.next();
-            if (anchor.getAttribute("href").contains(href)) {
-                nameList.add(anchor.getText());
-                break;
+            anchorAttribute = anchor.getAttribute("href");
+            if (anchorAttribute.contains(href)) {
+               // anchorName = anchor.getText();
+                nameList.add(anchorAttribute);
             }
         }
         return nameList;

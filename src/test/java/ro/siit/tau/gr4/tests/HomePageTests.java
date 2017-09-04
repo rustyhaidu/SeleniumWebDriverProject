@@ -26,13 +26,15 @@ public class HomePageTests extends BaseTest{
 
         Assert.assertEquals(checks.size(),4, "Search by Mac return 4 elements");
 
-        List<String> nameList = getNameListOfItems("&search=Mac");
-
-        boolean contained;
-        for (String name : nameList){
-
-            contained = name.contains("Mac");
+        //List<String> nameList = getNameListOfItems("http://shop-tausandbox.rhcloud.com/index.php?route=product/product&product_id");
+        List<WebElement> nameList = driver.findElements(By.partialLinkText("Mac"));
+        String linkText;
+        for (WebElement webElement : nameList){
+            boolean contained = false;
+            linkText = webElement.getText();
+            contained = linkText.contains("Mac");
             Assert.assertTrue(contained, "Checking that the items contain the String Mac");
+
         }
     }
 
