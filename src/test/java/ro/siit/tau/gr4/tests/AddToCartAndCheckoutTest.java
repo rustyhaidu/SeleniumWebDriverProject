@@ -57,7 +57,7 @@ public class AddToCartAndCheckoutTest extends BaseTest {
 
     //set quantity
         cartPage.setQuantity("4");
-        cartPage.getQuantityField("iPhone", driver).sendKeys("7");
+        /*cartPage.getQuantityField("iPhone", driver).sendKeys("7");*/
 
         cartPage.getUpdateButton().click();
 
