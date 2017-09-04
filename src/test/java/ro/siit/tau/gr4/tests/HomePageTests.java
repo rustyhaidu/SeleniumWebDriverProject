@@ -29,12 +29,24 @@ public class HomePageTests extends BaseTest{
         //List<String> nameList = getNameListOfItems("http://shop-tausandbox.rhcloud.com/index.php?route=product/product&product_id");
         List<WebElement> nameList = driver.findElements(By.partialLinkText("Mac"));
         String linkText;
+        int i = 0;
         for (WebElement webElement : nameList){
             boolean contained = false;
             linkText = webElement.getText();
             contained = linkText.contains("Mac");
-            Assert.assertTrue(contained, "Checking that the items contain the String Mac");
+            Assert.assertTrue(contained, "Checking that the items contain the String Mac, item: "+i);
+            i++;
+        }
 
+        List<WebElement> h4List = driver.findElements(By.xpath("//div[@class='row']/..//h4/a"));
+        String linkText2;
+        int i2 = 0;
+        for (WebElement webElement : h4List){
+            boolean contained = false;
+            linkText2 = webElement.getText();
+            contained = linkText2.contains("Mac");
+            Assert.assertTrue(contained, "Checking that the items contain the String Mac, item: "+i2);
+            i++;
         }
     }
 
