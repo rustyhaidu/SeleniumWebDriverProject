@@ -1,19 +1,20 @@
 package ro.siit.tau.gr4.tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ro.siit.tau.gr4.pages.CartPage;
 import ro.siit.tau.gr4.pages.CategoryPage;
 import ro.siit.tau.gr4.pages.HomePage;
 import ro.siit.tau.gr4.pages.ProductPage;
-import sun.misc.ASCIICaseInsensitiveComparator;
+import ro.siit.tau.gr4.utils.Utility;
 
 public class AddToCartAndCheckoutTest extends BaseTest {
-
-
-    ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
 
     @Test
     public void addToCart() {
@@ -23,59 +24,54 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         CategoryPage categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
 
-        homePage.getPhonesAndPdaCategory().click();
-        Select sortBy = new Select(categoryPage.getSortBy());
-        sortBy.selectByValue("http://shop-tausandbox.rhcloud.com/index.php?route=product/category&path=24&sort=pd.name&order=ASC");
+        //select category page and sort products
+        categoryPage.goToCategory("Phones & PDAs", driver).click();
 
-        Assert.assertEquals(categoryPage.getCategoryPageTitle().getText(),
-            "Phones & PDAs",
-            "check category page title");
+        Select sortBy = new Select(categoryPage.getSortBy());
+        sortBy.selectByVisibleText("Name (A - Z)");
+
+                Assert.assertEquals(categoryPage.goToCategory("Phones & PDAs", driver).getText(),
+                    "Phones & PDAs",
+                    "check category page title");
 
         //add iPhone to Cart
-        categoryPage.getiPhone().click();
+        categoryPage.getProduct("iPhone", driver).click();
         productPage.getAddToCartButton().click();
 
-        Assert.assertEquals(productPage.getProductName().getText(),
-            "iPhone",
-            "check product page title");
+                Assert.assertEquals(productPage.getProductTitle("h1", driver).getText(),
+                    "iPhone",
+                    "check product page title");
 
         //add Htc to Cart
-        homePage.getPhonesAndPdaCategory().click();
-        categoryPage.getHtcTouchHd().click();
+        categoryPage.goToCategory("Phones & PDAs", driver).click();
+        categoryPage.getProduct("HTC Touch HD", driver).click();
         productPage.getAddToCartButton().click();
 
-        Assert.assertEquals(productPage.getProductName().getText(),
-            "HTC Touch HD",
-            "check product page title");
+                    Assert.assertEquals(productPage.getProductTitle("h1", driver).getText(),
+                        "HTC Touch HD",
+                        "check product page title");
 
         //go to Cart
         homePage.getCartTotalButton().click();
         clickLinkByHref("route=checkout/cart");
 
-        Assert.assertEquals(cartPage.getCartBreadcrumb().getText(),
-            "Shopping Cart",
-            "check cart page breadcrumb");
+                    Assert.assertEquals(cartPage.getCartBreadcrumb().getText(),
+                        "Shopping Cart",
+                        "check cart page breadcrumb");
 
-        Assert.assertEquals(cartPage.getListediPhone().getText(),
-            "iPhone",
-            "check if iPhone is in Cart");
 
-        Assert.assertEquals(cartPage.getListedHtc().getText(),
-            "HTC Touch HD",
-            "check if Htc is in Cart");
-
-        //set quantity
+        //set quantities
         cartPage.setQuantity("2", "3");
 
         cartPage.getUpdateButton().click();
 
-        Assert.assertEquals(cartPage.getQuantityField1().getAttribute("value"),
-            "2",
-            "check qty first listed product");
+                    Assert.assertEquals(cartPage.getQuantityField1().getAttribute("value"),
+                        "2",
+                        "check qty first listed product");
 
-        Assert.assertEquals(cartPage.getQuantityField2().getAttribute("value"),
-            "3",
-            "check qty second listed product");
+                    Assert.assertEquals(cartPage.getQuantityField2().getAttribute("value"),
+                        "3",
+                        "check qty second listed product");
 
         //checkout
         cartPage.getCheckoutButton().click();
@@ -83,8 +79,8 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         Assert.assertEquals(cartPage.getCheckoutTitle().getText(),
             "Checkout",
             "check title for checkout page");
-
-        //try{ Thread.sleep(5000);}catch(InterruptedException ie){}
-
     }
+
+    //try{ Thread.sleep(5000);}catch(InterruptedException ie){}
+
 }

@@ -1,9 +1,13 @@
 package ro.siit.tau.gr4.pages;
 
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage {
 
@@ -19,11 +23,11 @@ public class CartPage {
     @FindBy(how = How.CSS, using = "tr:nth-child(1) td .input-group input.form-control")
     private WebElement quantityField1;
 
-    @FindBy(how = How.PARTIAL_LINK_TEXT, using = "HTC Touch HD")
+    /*@FindBy(how = How.PARTIAL_LINK_TEXT, using = "HTC Touch HD")
     private WebElement listedHtc;
 
     @FindBy(how = How.PARTIAL_LINK_TEXT, using = "iPhone")
-    private WebElement listediPhone;
+    private WebElement listediPhone;*/
 
     @FindBy(how = How.TAG_NAME, using = "h1")
     private WebElement checkoutTitle;
@@ -54,21 +58,6 @@ public class CartPage {
         this.checkoutTitle = checkoutTitle;
     }
 
-    public WebElement getListedHtc() {
-        return listedHtc;
-    }
-
-    public void setListedHtc(WebElement listedHtc) {
-        this.listedHtc = listedHtc;
-    }
-
-    public WebElement getListediPhone() {
-        return listediPhone;
-    }
-
-    public void setListediPhone(WebElement listediPhone) {
-        this.listediPhone = listediPhone;
-    }
 
     public WebElement getCartBreadcrumb() {
         return cartBreadcrumb;
@@ -100,6 +89,12 @@ public class CartPage {
 
     public void setCheckoutButton(WebElement checkoutButton) {
         this.checkoutButton = checkoutButton;
+    }
+
+    public static WebElement findProduct(String product, WebDriver driver) {
+        WebElement productInCart = (new WebDriverWait( driver, 3))
+            .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(product)));
+        return productInCart;
     }
 
 

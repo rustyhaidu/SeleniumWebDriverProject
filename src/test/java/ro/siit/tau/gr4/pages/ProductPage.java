@@ -2,9 +2,13 @@ package ro.siit.tau.gr4.pages;
 
 
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.ext.WEBGL_compressed_texture_s3tc;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage {
 
@@ -16,8 +20,6 @@ public class ProductPage {
 
     @FindBy(how = How.TAG_NAME, using = "h1")
     private WebElement productName;
-
-
 
     public WebElement getAddToCartButton() {
         return addToCartButton;
@@ -37,6 +39,12 @@ public class ProductPage {
 
     public WebElement getProductName() {
         return productName;
+    }
+
+    public static WebElement getProductTitle(String product, WebDriver driver){
+        WebElement productTitle = (new WebDriverWait(driver, 3))
+            .until(ExpectedConditions.presenceOfElementLocated(By.tagName(product)));
+        return productTitle;
     }
 
 
