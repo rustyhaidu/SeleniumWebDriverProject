@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -56,5 +57,21 @@ public class BaseTest {
                 break;
             }
         }
+    }
+
+    public List<String> getNameListOfItems(String href) {
+        List<String> nameList = new ArrayList<>();
+        List<WebElement> anchors = driver.findElements(By.tagName("a"));
+        Iterator<WebElement> i = anchors.iterator();
+
+        while (i.hasNext()) {
+            WebElement anchor = i.next();
+            if (anchor.getAttribute("href").contains(href)) {
+                nameList.add(anchor.getText());
+                break;
+            }
+        }
+        return nameList;
+
     }
 }

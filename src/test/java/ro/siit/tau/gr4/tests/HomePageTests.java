@@ -35,4 +35,5 @@ public class HomePageTests extends BaseTest{
             Assert.assertTrue(contained, "Checking that the items contain the String Mac");
         }
     }
+
 }
