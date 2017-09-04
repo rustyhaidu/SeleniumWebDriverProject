@@ -44,4 +44,17 @@ public class BaseTest {
             }
         }
     }
+
+    public void getLinkByHref(String href) {
+        List<WebElement> anchors = driver.findElements(By.tagName("a"));
+        Iterator<WebElement> i = anchors.iterator();
+
+        while (i.hasNext()) {
+            WebElement anchor = i.next();
+            if (anchor.getAttribute("href").contains(href)) {
+                anchor.getText();
+                break;
+            }
+        }
+    }
 }
