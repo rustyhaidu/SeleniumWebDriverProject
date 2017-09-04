@@ -17,29 +17,18 @@ public class CartPage {
     @FindBy(how = How.PARTIAL_LINK_TEXT, using = "Checkout")
     private WebElement checkoutButton;
 
-    @FindBy(how = How.CSS, using = "tr:nth-child(2) td .input-group input.form-control")
-    private WebElement quantityField2;
-
-    @FindBy(how = How.CSS, using = "tr:nth-child(1) td .input-group input.form-control")
-    private WebElement quantityField1;
-
-    /*@FindBy(how = How.PARTIAL_LINK_TEXT, using = "HTC Touch HD")
-    private WebElement listedHtc;
-
-    @FindBy(how = How.PARTIAL_LINK_TEXT, using = "iPhone")
-    private WebElement listediPhone;*/
+    @FindBy(how = How.CSS, using = "input[name^='quantity']")
+    private WebElement quantityField;
 
     @FindBy(how = How.TAG_NAME, using = "h1")
     private WebElement checkoutTitle;
 
-    @FindBy(how = How.CSS, using = "tr:nth-child(1) td .input-group span button:nth-child(1)")
+    @FindBy(how = How.XPATH, using = "//button[@type='submit']")
     private WebElement updateButton;
 
-    public void setQuantity(String quantityP1, String quantityP2){
-        quantityField1.clear();
-        quantityField1.sendKeys(quantityP1);
-        quantityField2.clear();
-        quantityField2.sendKeys(quantityP2);
+    public void setQuantity(String quantity){
+        quantityField.clear();
+        quantityField.sendKeys(quantity);
     }
 
     public WebElement getUpdateButton() {
@@ -58,29 +47,20 @@ public class CartPage {
         this.checkoutTitle = checkoutTitle;
     }
 
-
     public WebElement getCartBreadcrumb() {
         return cartBreadcrumb;
     }
 
-    public WebElement getQuantityField1() {
-        return quantityField1;
+    public WebElement getQuantityField() {
+        return quantityField;
     }
 
-    public void setQuantityField1(WebElement quantityField1) {
-        this.quantityField1 = quantityField1;
+    public void setQuantityField(WebElement quantityField1) {
+        this.quantityField = quantityField1;
     }
 
     public void setCartBreadcrumb(WebElement cartBreadcrumb) {
         this.cartBreadcrumb = cartBreadcrumb;
-    }
-
-    public WebElement getQuantityField2() {
-        return quantityField2;
-    }
-
-    public void setQuantityField2(WebElement quantityField2) {
-        this.quantityField2 = quantityField2;
     }
 
     public WebElement getCheckoutButton() {
@@ -93,9 +73,17 @@ public class CartPage {
 
     public static WebElement findProduct(String product, WebDriver driver) {
         WebElement productInCart = (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(product)));
+            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[descendant::a[text()='" + product + "']]")));
         return productInCart;
     }
+
+    public WebElement getQuantityField(String product, WebDriver driver){
+        WebElement productRow = findProduct(product, driver);
+        WebElement quantityField = productRow.findElement(By.cssSelector("input[name^='quantity']"));
+        return quantityField;
+    }
+
+
 
 
 }

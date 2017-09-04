@@ -15,8 +15,6 @@ public class ProductPage {
     @FindBy(how = How.ID, using = "button-cart")
     private WebElement addToCartButton;
 
-    @FindBy(how = How.ID, using = "quantity")
-    private WebElement quantity;
 
     @FindBy(how = How.TAG_NAME, using = "h1")
     private WebElement productName;
@@ -27,14 +25,6 @@ public class ProductPage {
 
     public void setAddToCartButton(WebElement addToCartButton) {
         this.addToCartButton = addToCartButton;
-    }
-
-    public WebElement getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(WebElement quantity) {
-        this.quantity = quantity;
     }
 
     public WebElement getProductName() {

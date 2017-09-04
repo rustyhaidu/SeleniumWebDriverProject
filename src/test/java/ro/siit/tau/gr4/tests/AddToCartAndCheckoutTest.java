@@ -24,63 +24,53 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         CategoryPage categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
 
-        //select category page and sort products
+    //go to category
         categoryPage.goToCategory("Phones & PDAs", driver).click();
-
-        Select sortBy = new Select(categoryPage.getSortBy());
-        sortBy.selectByVisibleText("Name (A - Z)");
 
                 Assert.assertEquals(categoryPage.goToCategory("Phones & PDAs", driver).getText(),
                     "Phones & PDAs",
                     "check category page title");
 
-        //add iPhone to Cart
+    //add iPhone to Cart
         categoryPage.getProduct("iPhone", driver).click();
+
+                Assert.assertEquals(productPage.getProductName().getText(),
+                    "iPhone",
+                    "check product page title");
+
         productPage.getAddToCartButton().click();
 
                 Assert.assertEquals(productPage.getProductTitle("h1", driver).getText(),
                     "iPhone",
                     "check product page title");
 
-        //add Htc to Cart
-        categoryPage.goToCategory("Phones & PDAs", driver).click();
-        categoryPage.getProduct("HTC Touch HD", driver).click();
-        productPage.getAddToCartButton().click();
-
-                    Assert.assertEquals(productPage.getProductTitle("h1", driver).getText(),
-                        "HTC Touch HD",
-                        "check product page title");
-
-        //go to Cart
+    //go to Cart
         homePage.getCartTotalButton().click();
         clickLinkByHref("route=checkout/cart");
 
                     Assert.assertEquals(cartPage.getCartBreadcrumb().getText(),
                         "Shopping Cart",
-                        "check cart page breadcrumb");
+                        "check if cart page is displayed");
+                    Assert.assertEquals(categoryPage.getProduct("iPhone", driver).getText(),
+                        "iPhone",
+                        "check if product is in cart");
 
-
-        //set quantities
-        cartPage.setQuantity("2", "3");
+    //set quantity
+        cartPage.setQuantity("4");
+        cartPage.getQuantityField("iPhone", driver).sendKeys("7");
 
         cartPage.getUpdateButton().click();
 
-                    Assert.assertEquals(cartPage.getQuantityField1().getAttribute("value"),
-                        "2",
-                        "check qty first listed product");
+                    Assert.assertEquals(cartPage.getQuantityField().getAttribute("value"),
+                        "4",
+                        "check if qty is set");
 
-                    Assert.assertEquals(cartPage.getQuantityField2().getAttribute("value"),
-                        "3",
-                        "check qty second listed product");
-
-        //checkout
+    //checkout
         cartPage.getCheckoutButton().click();
 
         Assert.assertEquals(cartPage.getCheckoutTitle().getText(),
             "Checkout",
             "check title for checkout page");
     }
-
-    //try{ Thread.sleep(5000);}catch(InterruptedException ie){}
 
 }

@@ -25,16 +25,18 @@ public class CategoryPage {
     }
 
 
-    public static WebElement getProduct(String product, WebDriver driver) {
+    public WebElement getProduct(String product, WebDriver driver) {
         WebElement productName = (new WebDriverWait( driver, 3))
             .until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(product)));
         return productName;
     }
 
 
-    public static WebElement goToCategory(String category, WebDriver driver){
+    public WebElement goToCategory(String category, WebDriver driver){
         WebElement categoryName = (new WebDriverWait(driver, 3))
             .until(ExpectedConditions.presenceOfElementLocated(By.linkText(category)));
         return categoryName;
     }
+
+
 }
