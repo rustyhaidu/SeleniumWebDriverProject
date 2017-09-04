@@ -80,7 +80,16 @@ public class RegistrationPage {
 
     @FindBy(how = How.XPATH, using = "//input[@name='confirm']/following-sibling::div")
     private WebElement actualPasswordConfirmError;
+    @FindBy(how = How.XPATH, using = "//a[@title='My Account']")
+    private WebElement myAccount;
+    @FindBy(how = How.LINK_TEXT, using = "Register")
+    private WebElement registerButton;
 
+    public void click_on_register(){
+        myAccount.click();
+        registerButton.click();
+
+    }
     public void register(RegistrationModel registrationModel) {
         firstNameField.clear();
         firstNameField.sendKeys(registrationModel.getFirstName());

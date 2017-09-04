@@ -8,6 +8,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ro.siit.tau.gr4.models.RegistrationModel;
 import ro.siit.tau.gr4.pages.HomePage;
+import ro.siit.tau.gr4.pages.LoginPage;
 import ro.siit.tau.gr4.pages.RegistrationPage;
 import ro.siit.tau.gr4.pages.WelcomePage;
 
@@ -21,7 +22,9 @@ import java.util.Iterator;
  * Created by andrei on 9/4/2017.
  */
 public class RegistrationTest extends BaseTest {
-    HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+
+    LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+
 
     @DataProvider(name = "JSONDataProviderRegistration")
     public Iterator<Object[]> jsonDataProviderCollection() {
@@ -45,6 +48,7 @@ public class RegistrationTest extends BaseTest {
         RegistrationPage registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         WelcomePage welcomePage = PageFactory.initElements(driver, WelcomePage.class);
         registrationPage.register(registrationModel);
+        registrationPage.click_on_register();
         if (registrationModel.expectSuccessfulRegistration() == false) {
             Assert.assertEquals(registrationPage.getFirstNameError(),
                 registrationModel.getFirstNameError(),
