@@ -3,6 +3,7 @@ package ro.siit.tau.gr4.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import ro.siit.tau.gr4.models.RegistrationModel;
 
 public class RegistrationPage {
     @FindBy(how = How.ID, using = "input-firstname")
@@ -80,6 +81,40 @@ public class RegistrationPage {
     @FindBy(how = How.XPATH, using = "//input[@name='confirm']/following-sibling::div")
     private WebElement actualPasswordConfirmError;
 
+    public void register(RegistrationModel registrationModel) {
+        firstNameField.clear();
+        firstNameField.sendKeys(registrationModel.getFirstName());
+        lastNameField.clear();
+        lastNameField.sendKeys(registrationModel.getLastName());
+        emailField.clear();
+        emailField.sendKeys(registrationModel.getEmail());
+        telephoneField.clear();
+        telephoneField.sendKeys(registrationModel.getTelephone());
+        faxField.clear();
+        faxField.sendKeys(registrationModel.getFax());
+        companyField.clear();
+        companyField.sendKeys(registrationModel.getCompany());
+        address1Field.clear();
+        address1Field.sendKeys(registrationModel.getAddress1());
+        address2Field.clear();
+        address2Field.sendKeys(registrationModel.getAddress2());
+        city1Field.clear();
+        city1Field.sendKeys(registrationModel.getCity1());
+        postcodeField.clear();
+        postcodeField.sendKeys(registrationModel.getPostcode());
+        country1Field.clear();
+        country1Field.sendKeys(registrationModel.getCountry1());
+        regionField.clear();
+        regionField.sendKeys(registrationModel.getRegion());
+        password1Field.clear();
+        password1Field.sendKeys(registrationModel.getPassword());
+        passwordConfirmField.clear();
+        passwordConfirmField.sendKeys(registrationModel.getPasswordConfirm());
+        agreeButton.click();
+        submitButton.click();
+
+    }
+
     public WebElement getFirstNameError() {
         return actualFirstNameError;
     }
@@ -92,28 +127,18 @@ public class RegistrationPage {
         return actualEmailError;
     }
 
-    public WebElement getTelephoneError() {
-        return actualTelephoneError;
-    }
+    public WebElement getTelephoneError() {return actualTelephoneError;}
 
-    public WebElement getAddress1Error() {
-        return actualAddress1Error;
-    }
+    public WebElement getAddress1Error() {return actualAddress1Error;}
 
     public WebElement getCityError() {
         return actualCityError;
     }
 
-    public WebElement getStateError() {
-        return actualStateError;
-    }
+    public WebElement getStateError() {return actualStateError;}
 
-    public WebElement getPasswordError() {
-        return actualPasswordError;
-    }
+    public WebElement getPasswordError() {return actualPasswordError;}
 
-    public WebElement getPasswordConfirmError() {
-        return actualPasswordConfirmError;
-    }
+    public WebElement getPasswordConfirmError() {return actualPasswordConfirmError;}
 }
 
