@@ -23,9 +23,6 @@ import java.util.Iterator;
  */
 public class RegistrationTest extends BaseTest {
 
-    LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-
-
     @DataProvider(name = "JSONDataProviderRegistration")
     public Iterator<Object[]> jsonDataProviderCollection() {
         Collection<Object[]> dp = new ArrayList<>();
@@ -47,8 +44,8 @@ public class RegistrationTest extends BaseTest {
 
         RegistrationPage registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         WelcomePage welcomePage = PageFactory.initElements(driver, WelcomePage.class);
-        registrationPage.register(registrationModel);
         registrationPage.click_on_register();
+        registrationPage.register(registrationModel);
         if (registrationModel.expectSuccessfulRegistration() == false) {
             Assert.assertEquals(registrationPage.getFirstNameError(),
                 registrationModel.getFirstNameError(),
