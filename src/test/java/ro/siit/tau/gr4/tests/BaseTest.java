@@ -36,10 +36,10 @@ public class BaseTest {
         driver.get("http://shop-tausandbox.rhcloud.com");
     }
 
-    @AfterMethod(alwaysRun = true)
+   /* @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
         driver.quit();
-    }
+    }*/
 
     public void clickLinkByHref(String href) {
         List<WebElement> anchors = driver.findElements(By.tagName("a"));
