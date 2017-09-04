@@ -8,8 +8,8 @@ public class RegistrationModel {
     private String telephone;
     private String fax;
     private String company;
-    private String adress1;
-    private String adress2;
+    private String address1;
+    private String address2;
     private String city1;
     private String postcode;
     private String country1;
@@ -20,7 +20,7 @@ public class RegistrationModel {
     private String LastNameError;
     private String EmailError;
     private String TelephoneError;
-    private String Adress1Error;
+    private String Address1Error;
     private String CityError;
     private String StateError;
     private String PasswordError;
@@ -75,20 +75,20 @@ public class RegistrationModel {
         this.company = company;
     }
 
-    public String getAdress1() {
-        return adress1;
+    public String getAddress1() {
+        return address1;
     }
 
     public void setAdress1(String adress1) {
-        this.adress1 = adress1;
+        this.address1 = address1;
     }
 
-    public String getAdress2() {
-        return adress2;
+    public String getAddress2() {
+        return address2;
     }
 
-    public void setAdress2(String adress2) {
-        this.adress2 = adress2;
+    public void setAddress2(String address2) {
+        this.address2 = address2;
     }
 
     public String getCity1() {
@@ -163,20 +163,16 @@ public class RegistrationModel {
         EmailError = emailError;
     }
 
-    public String getTelephoneError() {
-        return TelephoneError;
-    }
+    public String getTelephoneError() {return TelephoneError;}
 
     public void setTelephoneError(String telephoneError) {
         TelephoneError = telephoneError;
     }
 
-    public String getAdress1Error() {
-        return Adress1Error;
-    }
+    public String getAddress1Error() {return Address1Error;}
 
-    public void setAdress1Error(String address1Error) {
-        Adress1Error = address1Error;
+    public void setAddress1Error(String address1Error) {
+        Address1Error = address1Error;
     }
 
     public String getCityError() {
@@ -203,12 +199,44 @@ public class RegistrationModel {
         PasswordError = passwordError;
     }
 
-    public String getPasswordConfirmError() {
-        return PasswordConfirmError;
-    }
+    public String getPasswordConfirmError() {return PasswordConfirmError;}
 
     public void setPasswordConfirmError(String passwordConfirmError) {
         PasswordConfirmError = passwordConfirmError;
     }
 
+
+    public boolean expectSuccessfulRegistration() {
+
+        if (!this.FirstNameError.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+        if (!this.LastNameError.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+        if (!this.EmailError.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+        if (!this.TelephoneError.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+        if (!this.Address1Error.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+        if (!this.CityError.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+        if (!this.StateError.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+        if (!this.PasswordError.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+        if (!this.PasswordConfirmError.trim().equalsIgnoreCase("")) {
+            return false;
+        }
+            return true;
+        }
 }
+
+

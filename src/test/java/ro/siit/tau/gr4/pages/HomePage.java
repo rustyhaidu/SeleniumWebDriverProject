@@ -16,6 +16,11 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "//*[@id=\"cart\"]")
     private WebElement cartTotalButton;
 
+    @FindBy(how = How.XPATH, using = "//div[@id='search']/input")
+    private WebElement searchEdit;
+
+    @FindBy(how = How.XPATH, using = "//div[@id='search']/span/button")
+    private WebElement searchButton;
 
     public WebElement getCartTotalButton() {
         return cartTotalButton;
@@ -39,5 +44,11 @@ public class HomePage {
 
     public void setCamerasCategory(WebElement camerasCategory) {
         this.camerasCategory = camerasCategory;
+    }
+
+    public void searchItem(String itemName){
+        searchEdit.clear();
+        searchEdit.sendKeys(itemName);
+        searchButton.click();
     }
 }
