@@ -46,7 +46,7 @@ public class HomePageTests extends BaseTest{
             linkText2 = webElement.getText();
             contained = linkText2.contains("Mac");
             Assert.assertTrue(contained, "Checking that the items contain the String Mac, item: "+i2);
-            i++;
+            i2++;
         }
     }
 
