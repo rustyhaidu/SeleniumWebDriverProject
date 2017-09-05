@@ -24,18 +24,24 @@ public class CategoryPage {
         this.sortBy = sortBy;
     }
 
-
     public WebElement getProduct(String product, WebDriver driver) {
-        WebElement productName = (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(product)));
+        WebElement productName = driver.findElement(By.partialLinkText(product));
         return productName;
     }
 
+    public void clickProduct(String product, WebDriver driver) {
+        WebElement productName = driver.findElement(By.partialLinkText(product));
+        productName.click();
+    }
 
     public WebElement goToCategory(String category, WebDriver driver){
-        WebElement categoryName = (new WebDriverWait(driver, 3))
-            .until(ExpectedConditions.presenceOfElementLocated(By.linkText(category)));
+        WebElement categoryName = driver.findElement(By.linkText(category));
         return categoryName;
+    }
+
+    public void clickCategory(String category, WebDriver driver){
+        WebElement categoryName = driver.findElement(By.linkText(category));
+        categoryName.click();
     }
 
 

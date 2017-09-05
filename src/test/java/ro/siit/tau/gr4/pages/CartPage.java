@@ -17,22 +17,14 @@ public class CartPage {
     @FindBy(how = How.PARTIAL_LINK_TEXT, using = "Checkout")
     private WebElement checkoutButton;
 
-    @FindBy(how = How.CSS, using = "input[name^='quantity']")
-    private WebElement quantityField;
-
     @FindBy(how = How.TAG_NAME, using = "h1")
     private WebElement checkoutTitle;
 
     @FindBy(how = How.XPATH, using = "//button[@type='submit']")
     private WebElement updateButton;
 
-    public void setQuantity(String quantity){
-        quantityField.clear();
-        quantityField.sendKeys(quantity);
-    }
-
-    public WebElement getUpdateButton() {
-        return updateButton;
+    public void clickUpdateButton() {
+        updateButton.click();
     }
 
     public void setUpdateButton(WebElement updateButton) {
@@ -51,39 +43,22 @@ public class CartPage {
         return cartBreadcrumb;
     }
 
-    public WebElement getQuantityField() {
-        return quantityField;
-    }
-
-    public void setQuantityField(WebElement quantityField1) {
-        this.quantityField = quantityField1;
-    }
-
     public void setCartBreadcrumb(WebElement cartBreadcrumb) {
         this.cartBreadcrumb = cartBreadcrumb;
     }
 
-    public WebElement getCheckoutButton() {
-        return checkoutButton;
+    public void clickCheckoutButton() {
+        checkoutButton.click();
     }
 
-    public void setCheckoutButton(WebElement checkoutButton) {
-        this.checkoutButton = checkoutButton;
-    }
-
-    public static WebElement findProduct(String product, WebDriver driver) {
-        WebElement productInCart = (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[descendant::a[text()='" + product + "']]")));
+    public static WebElement getQuantityField(String product, WebDriver driver) {
+        WebElement productInCart = driver.findElement(By.xpath("//tr[descendant::a[text()='" + product + "']]//td[4]//input[@type='text']"));
         return productInCart;
     }
-
-    public WebElement getQuantityField(String product, WebDriver driver){
-        WebElement productRow = findProduct(product, driver);
-        WebElement quantityField = productRow.findElement(By.cssSelector("input[name^='quantity']"));
-        return quantityField;
+    public String readQuantity(String product, WebDriver driver){
+        WebElement productRow = getQuantityField(product, driver);
+        WebElement quantityField = productRow.findElement(By.xpath("//tr[descendant::a[text()='" + product + "']]//td[4]//input[@type='text']"));
+        return quantityField.getAttribute("value");
     }
-
-
-
 
 }

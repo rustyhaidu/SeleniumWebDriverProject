@@ -24,53 +24,53 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         CategoryPage categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
 
-    //go to category
-        categoryPage.goToCategory("Phones & PDAs", driver).click();
+        //go to category
+        categoryPage.clickCategory("Phones & PDAs", driver);
 
-                Assert.assertEquals(categoryPage.goToCategory("Phones & PDAs", driver).getText(),
-                    "Phones & PDAs",
-                    "check category page title");
+                    Assert.assertEquals(categoryPage.goToCategory("Phones & PDAs", driver).getText(),
+                        "Phones & PDAs",
+                        "check category page title");
 
-    //add iPhone to Cart
-        categoryPage.getProduct("iPhone", driver).click();
-
-                Assert.assertEquals(productPage.getProductName().getText(),
-                    "iPhone",
-                    "check product page title");
-
+        //add prod.1 to Cart
+        categoryPage.clickProduct("iPhone", driver);
+                    Assert.assertEquals(productPage.getProductTitle("h1", driver).getText(),
+                        "iPhone",
+                        "check product page title");
         productPage.getAddToCartButton().click();
 
-                Assert.assertEquals(productPage.getProductTitle("h1", driver).getText(),
-                    "iPhone",
-                    "check product page title");
+        //add prod.2 to Cart
+        categoryPage.clickCategory("Phones & PDAs", driver);
+        categoryPage.clickProduct("HTC Touch HD", driver);
+                    Assert.assertEquals(productPage.getProductTitle("h1", driver).getText(),
+                        "HTC Touch HD",
+                        "check product page title");
+        productPage.getAddToCartButton().click();
 
-    //go to Cart
-        homePage.getCartTotalButton().click();
-        clickLinkByHref("route=checkout/cart");
-
+        //go to Cart
+        homePage.clickCartTotalButton();
+        homePage.clickViewCart("route=checkout/cart", driver);
                     Assert.assertEquals(cartPage.getCartBreadcrumb().getText(),
                         "Shopping Cart",
                         "check if cart page is displayed");
                     Assert.assertEquals(categoryPage.getProduct("iPhone", driver).getText(),
                         "iPhone",
                         "check if product is in cart");
+        //change quantity for prod. 1
+        cartPage.getQuantityField("iPhone", driver).clear();
+        cartPage.getQuantityField("iPhone", driver).sendKeys("4");
 
-    //set quantity
-        cartPage.setQuantity("4");
-        /*cartPage.getQuantityField("iPhone", driver).sendKeys("7");*/
-
-        cartPage.getUpdateButton().click();
-
-                    Assert.assertEquals(cartPage.getQuantityField().getAttribute("value"),
+        cartPage.clickUpdateButton();
+                    Assert.assertEquals(cartPage.readQuantity("iPhone", driver),
                         "4",
                         "check if qty is set");
-
-    //checkout
-        cartPage.getCheckoutButton().click();
-
-        Assert.assertEquals(cartPage.getCheckoutTitle().getText(),
-            "Checkout",
-            "check title for checkout page");
+                    Assert.assertEquals(cartPage.readQuantity("HTC Touch HD", driver),
+                        "1",
+                        "check if qty is set");
+        //checkout
+        cartPage.clickCheckoutButton();
+                    Assert.assertEquals(cartPage.getCheckoutTitle().getText(),
+                        "Checkout",
+                        "check title for checkout page");
     }
 
 }

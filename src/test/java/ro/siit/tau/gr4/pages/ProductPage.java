@@ -15,9 +15,9 @@ public class ProductPage {
     @FindBy(how = How.ID, using = "button-cart")
     private WebElement addToCartButton;
 
-
+/*
     @FindBy(how = How.TAG_NAME, using = "h1")
-    private WebElement productName;
+    private WebElement productName;*/
 
     public WebElement getAddToCartButton() {
         return addToCartButton;
@@ -27,13 +27,12 @@ public class ProductPage {
         this.addToCartButton = addToCartButton;
     }
 
-    public WebElement getProductName() {
+    /*public WebElement getProductName() {
         return productName;
-    }
+    }*/
 
-    public static WebElement getProductTitle(String product, WebDriver driver){
-        WebElement productTitle = (new WebDriverWait(driver, 3))
-            .until(ExpectedConditions.presenceOfElementLocated(By.tagName(product)));
+    public WebElement getProductTitle(String product, WebDriver driver){
+        WebElement productTitle = driver.findElement(By.tagName(product));
         return productTitle;
     }
 
