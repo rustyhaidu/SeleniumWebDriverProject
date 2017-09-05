@@ -20,7 +20,7 @@ public class HomePageTests extends BaseTest {
     }
 
     @Test
-    public void searchItemTest() throws InterruptedException {
+    public void searchItemsAndAddToCartTest() throws InterruptedException {
         homePage.searchItem("Mac");
         List<WebElement> checks = driver.findElements(By.className("image"));
 
