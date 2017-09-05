@@ -24,7 +24,7 @@ public class HomePageTests extends BaseTest{
         homePage.searchItem("Mac");
         List<WebElement> checks =  driver.findElements(By.className("image"));
 
-        Assert.assertEquals(checks.size(),4, "Search by Mac return 4 elements");
+        Assert.assertEquals(checks.size(),4, "Search by Mac return 4 Image elements");
 
         //List<String> nameList = getNameListOfItems("http://shop-tausandbox.rhcloud.com/index.php?route=product/product&product_id");
         List<WebElement> nameList = driver.findElements(By.partialLinkText("Mac"));
@@ -39,6 +39,7 @@ public class HomePageTests extends BaseTest{
         }
 
         List<WebElement> h4List = driver.findElements(By.xpath("//div[@class='row']/..//h4/a"));
+        Assert.assertEquals(h4List.size(),4, "Search by Mac return 4 title elements");
         String linkText2;
         int i2 = 0;
         for (WebElement webElement : h4List){
