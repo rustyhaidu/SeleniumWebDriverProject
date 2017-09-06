@@ -16,6 +16,13 @@ public class CategoryPage {
     @FindBy(how = How.ID, using = "input-sort")
     private WebElement sortBy;
 
+    @FindBy(how = How.TAG_NAME, using = "h2")
+    private WebElement categoryTitle;
+
+    public String getCategoryTitle(){
+        return categoryTitle.getText();
+    }
+
     public WebElement getSortBy() {
         return sortBy;
     }

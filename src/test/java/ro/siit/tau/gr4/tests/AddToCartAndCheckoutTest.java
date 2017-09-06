@@ -28,7 +28,7 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         //go to category
         categoryPage.clickCategory("Phones & PDAs", driver);
 
-                    Assert.assertEquals(categoryPage.goToCategory("Phones & PDAs", driver).getText(),
+                    Assert.assertEquals(categoryPage.getCategoryTitle(),
                         "Phones & PDAs",
                         "check category page title");
 
