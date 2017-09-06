@@ -11,6 +11,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage {
 
+    WebDriver driver;
+
+    public void setDriver(WebDriver driver){
+        this.driver=driver;}
+
     @FindBy(how = How.PARTIAL_LINK_TEXT, using = "Shopping Cart")
     private WebElement cartBreadcrumb;
 
@@ -51,14 +56,29 @@ public class CartPage {
         checkoutButton.click();
     }
 
-    public static WebElement getQuantityField(String product, WebDriver driver) {
-        WebElement productInCart = driver.findElement(By.xpath("//tr[descendant::a[text()='" + product + "']]//td[4]//input[@type='text']"));
+    public WebElement getQuantityField(String product) {
+        WebElement productInCart = driver.findElement(By.xpath("//tr[descendant::a[text()='" +
+            product + "']]//td[4]//input[@type='text']"));
         return productInCart;
     }
-    public String readQuantity(String product, WebDriver driver){
-        WebElement productRow = getQuantityField(product, driver);
-        WebElement quantityField = productRow.findElement(By.xpath("//tr[descendant::a[text()='" + product + "']]//td[4]//input[@type='text']"));
-        return quantityField.getAttribute("value");
+
+    public String readQuantity(String product){
+        WebElement quantityField = getQuantityField(product);
+        return quantityField.getAttribute("value");}
+
+    /*public WebElement getCartRow(String product){
+        return (new WebDriverWait( driver, 3))
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[descendant::a[text()='" + product + "']]")));
     }
+
+    public WebElement getQuantityField(String product){
+        WebElement cartRow = this.getCartRow(product);
+        return cartRow.findElement(By.xpath("//input[@type='text']"));
+    }
+
+    public String readQuantity(String product){
+        WebElement quantityField = this.getQuantityField(product);
+        return quantityField.getAttribute("value");
+    }*/
 
 }
