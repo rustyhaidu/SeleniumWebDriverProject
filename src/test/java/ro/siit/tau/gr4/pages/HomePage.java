@@ -32,10 +32,21 @@ public class HomePage {
     private List<WebElement> h4List;
 
     @FindBy(how = How.XPATH, using = "//div[@class='row']/div[@class='col-sm-6 text-right']")
-    WebElement noOfResultsWebElement;
+    private WebElement noOfResultsWebElement;
 
     @FindBy(how = How.XPATH, using = "//div[@class='row']/div/div/div[@class='button-group']/button[1]")
     List<WebElement> buttonList;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='row']/div//div/p[@class='price']")
+    private List<WebElement> priceList;
+
+    public List<WebElement> getPriceList() {
+        return priceList;
+    }
+
+    public List<WebElement> getButtonList() {
+        return buttonList;
+    }
 
     public String getTextFromNoOfResults() {
         return noOfResultsWebElement.getText();

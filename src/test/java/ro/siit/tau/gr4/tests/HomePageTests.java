@@ -56,7 +56,7 @@ public class HomePageTests extends BaseTest {
         Assert.assertEquals(showingNumberOfResults, "Showing 1 to 4 of 4 (1 Pages)", "Checking the number of results");
 
         //"Creating a list of buttons[1] = Add to card and click on each one
-        List<WebElement> buttonList = driver.findElements(By.xpath("//div[@class='row']/div/div/div[@class='button-group']/button[1]"));
+        List<WebElement> buttonList = homePage.getButtonList();
         String itemTitle;
         String successMessage;
         for (int i = 0; i < buttonList.size(); i++) {
@@ -86,7 +86,7 @@ public class HomePageTests extends BaseTest {
         Assert.assertEquals(cartTotal, "4 item(s) - 3,600.00€", "Expected String: item count and total");
 
         //Creating a list of prices and getting just values
-        List<WebElement> priceList = driver.findElements(By.xpath("//div[@class='row']/div//div/p[@class='price']"));
+        List<WebElement> priceList = homePage.getPriceList();
         String itemValue;
         double expectedTotalValue = 0;
         for (WebElement webElement : priceList) {
