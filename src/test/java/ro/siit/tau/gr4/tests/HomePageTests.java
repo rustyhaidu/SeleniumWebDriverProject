@@ -91,8 +91,10 @@ public class HomePageTests extends BaseTest {
         String itemValue;
         double expectedTotalValue = 0;
         for (WebElement webElement : priceList) {
+            //Getting just the first value from the string by Regex
             itemValue = webElement.getText().replace("\n", "").replaceAll("€Ex.*$", "");
 
+            // Getting the text from the cart button and getting the total value
             expectedTotalValue = expectedTotalValue + Double.parseDouble(itemValue.replace(",", ""));        }
         String cartTotalValue;
         cartTotalValue = cartTotal.substring(cartTotal.indexOf("-")).replace("-", "").trim();
