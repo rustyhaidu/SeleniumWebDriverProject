@@ -23,6 +23,7 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
         CategoryPage categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
+        cartPage.setDriver(driver);
 
         //go to category
         categoryPage.clickCategory("Phones & PDAs", driver);
@@ -56,14 +57,14 @@ public class AddToCartAndCheckoutTest extends BaseTest {
                         "iPhone",
                         "check if product is in cart");
         //change quantity for prod. 1
-        cartPage.getQuantityField("iPhone", driver).clear();
-        cartPage.getQuantityField("iPhone", driver).sendKeys("4");
+        cartPage.getQuantityField("iPhone").clear();
+        cartPage.getQuantityField("iPhone").sendKeys("4");
 
         cartPage.clickUpdateButton();
-                    Assert.assertEquals(cartPage.readQuantity("iPhone", driver),
+                    Assert.assertEquals(cartPage.readQuantity("iPhone"),
                         "4",
                         "check if qty is set");
-                    Assert.assertEquals(cartPage.readQuantity("HTC Touch HD", driver),
+                    Assert.assertEquals(cartPage.readQuantity("HTC Touch HD"),
                         "1",
                         "check if qty is set");
         //checkout
@@ -72,5 +73,4 @@ public class AddToCartAndCheckoutTest extends BaseTest {
                         "Checkout",
                         "check title for checkout page");
     }
-
 }
