@@ -22,6 +22,37 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "//div[@id='search']/span/button")
     private WebElement searchButton;
 
+    @FindBy(how = How.CLASS_NAME, using = "image")
+    private List<WebElement> listOfImageElements;
+
+    @FindBy(how = How.PARTIAL_LINK_TEXT, using = "Mac")
+    private List<WebElement> nameList;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='row']/..//h4/a")
+    private List<WebElement> h4List;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='row']/div[@class='col-sm-6 text-right']")
+    WebElement noOfResultsWebElement;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='row']/div/div/div[@class='button-group']/button[1]")
+    List<WebElement> buttonList;
+
+    public String getTextFromNoOfResults() {
+        return noOfResultsWebElement.getText();
+    }
+
+    public List<WebElement> getFoundH4List() {
+        return h4List;
+    }
+
+    public List<WebElement> getListOfImageElements() {
+        return listOfImageElements;
+    }
+
+    public List<WebElement> getFoundMacNameList() {
+        return nameList;
+    }
+
     public void clickCartTotalButton() {
         cartTotalButton.click();
     }

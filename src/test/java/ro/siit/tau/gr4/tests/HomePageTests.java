@@ -12,7 +12,7 @@ import java.util.List;
 
 public class HomePageTests extends BaseTest {
 
-    HomePage homePage;
+    private HomePage homePage;
 
     @BeforeMethod
     public void setUpSearch() {
@@ -22,16 +22,16 @@ public class HomePageTests extends BaseTest {
     @Test
     public void searchItemsAndAddToCartTest() throws InterruptedException {
         homePage.searchItem("Mac");
-        List<WebElement> checks = driver.findElements(By.className("image"));
+        List<WebElement> checks = homePage.getListOfImageElements();
 
         Assert.assertEquals(checks.size(), 4, "Search by Mac return 4 Image elements");
 
         //"Creating a List of partial Links that contain the Mac String"
-        List<WebElement> nameList = driver.findElements(By.partialLinkText("Mac"));
+        List<WebElement> nameList = homePage.getFoundMacNameList();
         String linkText;
         int j = 0;
         for (WebElement webElement : nameList) {
-            boolean contained = false;
+            boolean contained;
             linkText = webElement.getText();
             contained = linkText.contains("Mac");
             Assert.assertTrue(contained, "Checking that the TITLE of items contain the String Mac, item: " + j);
@@ -39,26 +39,25 @@ public class HomePageTests extends BaseTest {
         }
 
         //"Creating a List of webelements that are h4 from the xpath"
-        List<WebElement> h4List = driver.findElements(By.xpath("//div[@class='row']/..//h4/a"));
+        List<WebElement> h4List = homePage.getFoundH4List();
         Assert.assertEquals(h4List.size(), 4, "Search by Mac return 4 title elements");
         String linkText2;
         int k = 0;
         for (WebElement webElement : h4List) {
-            boolean contained = false;
+            boolean contained;
             linkText2 = webElement.getAttribute("href");
             contained = linkText2.contains("Mac");
             Assert.assertTrue(contained, "Checking that the LINKS(href) of the items contain the String Mac, item: " + k);
             k++;
         }
         //"Checking that the String from the bottom of the page shows that correct number of elements found"
-        WebElement noOfResultsWebElement = driver.findElement(By.xpath("//div[@class='row']/div[@class='col-sm-6 text-right']"));
-        String showingNumberOfResults = noOfResultsWebElement.getText();
+        String showingNumberOfResults = homePage.getTextFromNoOfResults();
 
         Assert.assertEquals(showingNumberOfResults, "Showing 1 to 4 of 4 (1 Pages)", "Checking the number of results");
 
         //"Creating a list of buttons[1] = Add to card and click on each one
         List<WebElement> buttonList = driver.findElements(By.xpath("//div[@class='row']/div/div/div[@class='button-group']/button[1]"));
-        String itemTitle = "";
+        String itemTitle;
         String successMessage;
         for (int i = 0; i < buttonList.size(); i++) {
             buttonList.get(i).click();
@@ -102,6 +101,11 @@ public class HomePageTests extends BaseTest {
         double actualTotalValue = Double.parseDouble(cartTotalValue);
 
         Assert.assertEquals(expectedTotalValue, actualTotalValue, "comparing the totals");
+    }
+
+    @Test
+    public void compareItemsTest(){
+        homePage.searchItem(" ");
     }
 
 }
