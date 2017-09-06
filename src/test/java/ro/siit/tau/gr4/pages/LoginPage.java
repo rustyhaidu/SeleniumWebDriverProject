@@ -39,6 +39,15 @@ public class LoginPage {
         loginButtonAfterDropDown.click();
     }
 
+    public void loginFromWishList(String emailAddress, String password){
+
+        emailAddressField.clear();
+        emailAddressField.sendKeys(emailAddress);
+        passwordField.clear();
+        passwordField.sendKeys(password);
+        loginButtonAfterDropDown.click();
+    }
+
 
     public String getGeneralError(){
 
