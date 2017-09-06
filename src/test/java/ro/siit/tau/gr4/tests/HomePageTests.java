@@ -63,7 +63,7 @@ public class HomePageTests extends BaseTest {
         Thread.sleep(1000);
 
         String cartTotal;
-        cartTotal = homePage.getCartTotalButton().getText();
+        cartTotal = homePage.getTextFromCartTotalButton();
 
         System.out.println(cartTotal);
 

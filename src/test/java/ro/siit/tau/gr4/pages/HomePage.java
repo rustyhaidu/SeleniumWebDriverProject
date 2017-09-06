@@ -26,6 +26,10 @@ public class HomePage {
         cartTotalButton.click();
     }
 
+    public String getTextFromCartTotalButton() {
+        return cartTotalButton.getText();
+    }
+
     public void setCartTotalButton(WebElement cartTotalButton) {
         this.cartTotalButton = cartTotalButton;
     }
