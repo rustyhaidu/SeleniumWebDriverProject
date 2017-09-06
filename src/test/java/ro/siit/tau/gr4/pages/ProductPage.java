@@ -15,9 +15,19 @@ public class ProductPage {
     @FindBy(how = How.ID, using = "button-cart")
     private WebElement addToCartButton;
 
-/*
-    @FindBy(how = How.TAG_NAME, using = "h1")
-    private WebElement productName;*/
+    @FindBy(how = How.XPATH, using = "//button[@data-original-title='Add to Wish List']")
+    private WebElement addToWishListButton;
+
+    @FindBy(how = How.ID, using = "wishlist-total")
+    private WebElement WishList;
+
+    public void clickAddToWishListButton(){
+        addToWishListButton.click();
+    }
+
+    public void goToWishList(){
+        WishList.click();
+    }
 
     public WebElement getAddToCartButton() {
         return addToCartButton;
@@ -35,6 +45,8 @@ public class ProductPage {
         WebElement productTitle = driver.findElement(By.tagName(product));
         return productTitle;
     }
+
+
 
 
 }
