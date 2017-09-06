@@ -29,25 +29,25 @@ public class HomePageTests extends BaseTest {
         //List<String> nameList = getNameListOfItems("http://shop-tausandbox.rhcloud.com/index.php?route=product/product&product_id");
         List<WebElement> nameList = driver.findElements(By.partialLinkText("Mac"));
         String linkText;
-        int i = 0;
+        int j = 0;
         for (WebElement webElement : nameList) {
             boolean contained = false;
             linkText = webElement.getText();
             contained = linkText.contains("Mac");
-            Assert.assertTrue(contained, "Checking that the items contain the String Mac, item: " + i);
-            i++;
+            Assert.assertTrue(contained, "Checking that the LINKS of items contain the String Mac, item: " + j);
+            j++;
         }
 
         List<WebElement> h4List = driver.findElements(By.xpath("//div[@class='row']/..//h4/a"));
         Assert.assertEquals(h4List.size(), 4, "Search by Mac return 4 title elements");
         String linkText2;
-        int i2 = 0;
+        int k = 0;
         for (WebElement webElement : h4List) {
             boolean contained = false;
             linkText2 = webElement.getText();
             contained = linkText2.contains("Mac");
-            Assert.assertTrue(contained, "Checking that the items contain the String Mac, item: " + i2);
-            i2++;
+            Assert.assertTrue(contained, "Checking that the Title of the items contain the String Mac, item: " + k);
+            k++;
         }
 
         WebElement noOfResultsWebElement = driver.findElement(By.xpath("//div[@class='row']/div[@class='col-sm-6 text-right']"));
@@ -56,9 +56,21 @@ public class HomePageTests extends BaseTest {
         Assert.assertEquals(showingNumberOfResults, "Showing 1 to 4 of 4 (1 Pages)", "Checking the number of results");
 
         List<WebElement> buttonList = driver.findElements(By.xpath("//div[@class='row']/div/div/div[@class='button-group']/button[1]"));
-
-        for (WebElement webElement : buttonList) {
-            webElement.click();
+        String itemTitle="";
+        String successMessage;
+        for (int i = 0;i< buttonList.size();i++) {
+            buttonList.get(i).click();
+            itemTitle = h4List.get(i).getText();
+            Thread.sleep(1000);
+            successMessage = driver.
+                findElement(By.xpath("//div[@class='container']/div[@class='alert alert-success']"))
+                .getText().replace("×","").trim();
+            Assert.assertEquals(successMessage,
+                new StringBuilder("Success: You have added")
+                    .append(" ")
+                    .append(itemTitle)
+                    .append(" to your shopping cart!").toString());
+                //"Success: You have added "+itemTitle+" to your shopping cart!");
         }
         Thread.sleep(1000);
 
