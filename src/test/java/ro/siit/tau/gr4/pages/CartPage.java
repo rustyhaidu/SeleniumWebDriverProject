@@ -70,7 +70,7 @@ public class CartPage {
 
    public WebElement getCartRow(String product){
         return (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//form/div[@class='table-responsive']/table[@class='table table-bordered']/tbody/tr[descendant::a[text()='" + product + "']]")));
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='table table-bordered']/tbody/tr[descendant::a[text()='" + product + "']]")));
     }
 
 /*    public WebElement getQuantityField(String product){
