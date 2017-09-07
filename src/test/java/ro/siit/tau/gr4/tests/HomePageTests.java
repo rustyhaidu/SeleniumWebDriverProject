@@ -63,9 +63,7 @@ public class HomePageTests extends BaseTest {
             buttonList.get(i).click();
             itemTitle = h4List.get(i).getText();
             Thread.sleep(1000);
-            successMessage = driver.
-                findElement(By.xpath("//div[@class='container']/div[@class='alert alert-success']"))
-                .getText().replace("×", "").trim();
+            successMessage = homePage.getSuccessMessage().getText().replace("×", "").trim();
 
             //"Checking that the Success message contains the item added to cart"
             Assert.assertEquals(successMessage,
