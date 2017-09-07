@@ -1,5 +1,6 @@
 package ro.siit.tau.gr4.tests;
 
+import com.gargoylesoftware.htmlunit.javascript.host.Touch;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -28,11 +29,21 @@ public class AddToWishListTest extends BaseTest{
                         "check category page title");
 
         categoryPage.clickProduct("Canon EOS 5D", driver);
-                    Assert.assertEquals(productPage.getProductTitle("h1", driver).getText(),
+        String product = productPage.getProductTitle("h1", driver).getText();
+                    Assert.assertEquals(product,
                         "Canon EOS 5D",
                         "check product page title");
 
         productPage.clickAddToWishListButton();
+
+                    Assert.assertEquals(homePage.getSuccessMessage().getText(),
+                        new StringBuilder("You must login or create an account to save ")
+                            .append(product)
+                            .append(" to your wish list!\n" +
+                                "×").toString(),
+                        "check message");
+
+        //You must login or create an account to save HTC Touch HD to your wish list!
 
         productPage.goToWishList();
 
@@ -40,8 +51,6 @@ public class AddToWishListTest extends BaseTest{
                     Assert.assertEquals(wishListPage.getWishListTitle(),
                         "My Wish List",
                         "check wish list title");
-
-
 
     }
 }
