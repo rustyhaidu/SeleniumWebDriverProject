@@ -56,11 +56,27 @@ public class CartPage {
         checkoutButton.click();
     }
 
-    public WebElement getCartRow(String product){
-        return (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//form/div[@class='table-responsive']/table[@class='table table-bordered']/tbody/tr[descendant::a[text()='"
-                + product + "']]")));
+  /*  public WebElement getQuantityField(String product) {
+        WebElement productInCart = driver.findElement(By.xpath("//tr[descendant::a[text()='" +
+            product + "']]//td[4]//input[@type='text']"));
+        return productInCart;
     }
+
+   /* public WebElement getCartRow(String product){
+        String descendent = "//form/div[@class='table-responsive']/table[@class='table table-bordered']/tbody/tr[descendant::a[text()='" + product + "']]";
+        return (new WebDriverWait( driver, 3))
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(descendent)));
+    }*/
+
+   public WebElement getCartRow(String product){
+        return (new WebDriverWait( driver, 3))
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//form/div[@class='table-responsive']/table[@class='table table-bordered']/tbody/tr[descendant::a[text()='" + product + "']]")));
+    }
+
+/*    public WebElement getQuantityField(String product){
+        WebElement cartRow = this.getCartRow(product);
+        return cartRow.findElement(By.xpath("//input[@type='text' and contains(@name,'quantity')]"));
+    }*/
 
     public WebElement getQuantityField(String product){
         WebElement cartRow = this.getCartRow(product);
