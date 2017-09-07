@@ -16,8 +16,11 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "//*[@id=\"cart\"]")
     private WebElement cartTotalButton;
 
-    @FindBy(how = How.PARTIAL_LINK_TEXT, using = "View Cart")
+    @FindBy(how = How.PARTIAL_LINK_TEXT, using = " View Cart")
     private WebElement viewCartButton;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='container']/div[@class='alert alert-success']")
+    private WebElement successMessage;
 
     @FindBy(how = How.XPATH, using = "//div[@id='search']/input")
     private WebElement searchEdit;
@@ -42,6 +45,10 @@ public class HomePage {
 
     @FindBy(how = How.XPATH, using = "//div[@class='row']/div//div/p[@class='price']")
     private List<WebElement> priceList;
+
+    public WebElement getSuccessMessage() {
+        return successMessage;
+    }
 
     public void clickViewCartBtn(){
         viewCartButton.click();
