@@ -26,7 +26,7 @@ public class HomePage {
     private List<WebElement> listOfImageElements;
 
     @FindBy(how = How.PARTIAL_LINK_TEXT, using = "Mac")
-    private List<WebElement> nameList;
+    private List<WebElement> macProductList;
 
     @FindBy(how = How.XPATH, using = "//div[@class='row']/..//h4/a")
     private List<WebElement> h4List;
@@ -35,7 +35,7 @@ public class HomePage {
     private WebElement noOfResultsWebElement;
 
     @FindBy(how = How.XPATH, using = "//div[@class='row']/div/div/div[@class='button-group']/button[1]")
-    List<WebElement> buttonList;
+    private List<WebElement> buttonList;
 
     @FindBy(how = How.XPATH, using = "//div[@class='row']/div//div/p[@class='price']")
     private List<WebElement> priceList;
@@ -61,7 +61,7 @@ public class HomePage {
     }
 
     public List<WebElement> getFoundMacNameList() {
-        return nameList;
+        return macProductList;
     }
 
     public void clickCartTotalButton() {
@@ -85,10 +85,11 @@ public class HomePage {
     public void clickLinkByHref(String href, WebDriver driver) {
         List<WebElement> anchors = driver.findElements(By.tagName("a"));
         Iterator<WebElement> i = anchors.iterator();
-
+        String anchorAttribute;
         while (i.hasNext()) {
             WebElement anchor = i.next();
-            if (anchor.getAttribute("href").contains(href)) {
+            anchorAttribute = anchor.getAttribute("href");
+            if (anchorAttribute.contains(href)) {
                 anchor.click();
                 break;
             }
