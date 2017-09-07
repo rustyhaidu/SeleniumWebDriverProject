@@ -49,7 +49,8 @@ public class AddToCartAndCheckoutTest extends BaseTest {
 
         //go to Cart
         homePage.clickCartTotalButton();
-        homePage.clickViewCart("route=checkout/cart", driver);
+        /*homePage.clickViewCart("route=checkout/cart", driver);*/
+        homePage.clickViewCartBtn();
                     Assert.assertEquals(cartPage.getCartBreadcrumb().getText(),
                         "Shopping Cart",
                         "check if cart page is displayed");
