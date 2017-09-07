@@ -56,7 +56,7 @@ public class CartPage {
         checkoutButton.click();
     }
 
-    public WebElement getQuantityField(String product) {
+  /*  public WebElement getQuantityField(String product) {
         WebElement productInCart = driver.findElement(By.xpath("//tr[descendant::a[text()='" +
             product + "']]//td[4]//input[@type='text']"));
         return productInCart;
@@ -64,21 +64,32 @@ public class CartPage {
 
     public String readQuantity(String product){
         WebElement quantityField = getQuantityField(product);
-        return quantityField.getAttribute("value");}
+        return quantityField.getAttribute("value");}*/
 
-    /*public WebElement getCartRow(String product){
+   /* public WebElement getCartRow(String product){
+        String descendent = "//form/div[@class='table-responsive']/table[@class='table table-bordered']/tbody/tr[descendant::a[text()='" + product + "']]";
         return (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[descendant::a[text()='" + product + "']]")));
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(descendent)));
+    }*/
+
+    public WebElement getCartRow(String product){
+        return (new WebDriverWait( driver, 3))
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//form/div[@class='table-responsive']/table[@class='table table-bordered']/tbody/tr[descendant::a[text()='" + product + "']]")));
     }
+
+  /*  public WebElement getQuantityField(String product){
+        WebElement cartRow = this.getCartRow(product);
+        return cartRow.findElement(By.xpath("//div[@class='input-group btn-block']/input[@type='text']"));
+    }*/
 
     public WebElement getQuantityField(String product){
         WebElement cartRow = this.getCartRow(product);
-        return cartRow.findElement(By.xpath("//input[@type='text']"));
+        return cartRow.findElement(By.cssSelector("input[name^='quantity']"));
     }
 
     public String readQuantity(String product){
         WebElement quantityField = this.getQuantityField(product);
         return quantityField.getAttribute("value");
-    }*/
+    }
 
 }
