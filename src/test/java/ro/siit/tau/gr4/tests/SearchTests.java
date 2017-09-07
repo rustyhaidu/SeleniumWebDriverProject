@@ -10,7 +10,7 @@ import ro.siit.tau.gr4.pages.HomePage;
 
 import java.util.List;
 
-public class HomePageTests extends BaseTest {
+public class SearchTests extends BaseTest {
 
     private HomePage homePage;
 
@@ -99,11 +99,6 @@ public class HomePageTests extends BaseTest {
         double actualTotalValue = Double.parseDouble(cartTotalValue);
 
         Assert.assertEquals(expectedTotalValue, actualTotalValue, "comparing the totals");
-    }
-
-    @Test
-    public void compareItemsTest(){
-        homePage.searchItem(" ");
     }
 
 }
