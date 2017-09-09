@@ -73,15 +73,15 @@ public class CartPage {
             .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='table table-bordered']/tbody/tr[descendant::a[text()='" + product + "']]")));
     }
 
-/*    public WebElement getQuantityField(String product){
-        WebElement cartRow = this.getCartRow(product);
-        return cartRow.findElement(By.xpath("//input[@type='text' and contains(@name,'quantity')]"));
-    }*/
-
     public WebElement getQuantityField(String product){
         WebElement cartRow = this.getCartRow(product);
-        return cartRow.findElement(By.cssSelector("input[name^='quantity']"));
+        return cartRow.findElement(By.xpath("//input[@type='text' and contains(@name,'quantity')]"));
     }
+
+    /*public WebElement getQuantityField(String product){
+        WebElement cartRow = this.getCartRow(product);
+        return cartRow.findElement(By.cssSelector("input[name^='quantity']"));
+    }*/
 
     public String readQuantity(String product){
         WebElement quantityField = this.getQuantityField(product);
