@@ -16,16 +16,15 @@ public class RegistrationModel {
     private String region;
     private String password;
     private String passwordConfirm;
-    private String FirstNameError;
-    private String LastNameError;
-    private String EmailError;
-    private String TelephoneError;
-    private String Address1Error;
-    private String CityError;
-    private String StateError;
-    private String PasswordError;
-    private String PasswordConfirmError;
-
+    private String firstNameError;
+    private String lastNameError;
+    private String emailError;
+    private String telephoneError;
+    private String address1Error;
+    private String cityError;
+    private String stateError;
+    private String passwordError;
+//    private String passwordConfirmError;
 
     public String getFirstName() {
         return firstName;
@@ -79,7 +78,7 @@ public class RegistrationModel {
         return address1;
     }
 
-    public void setAdress1(String adress1) {
+    public void setAddress1(String address1) {
         this.address1 = address1;
     }
 
@@ -107,134 +106,125 @@ public class RegistrationModel {
         this.postcode = postcode;
     }
 
-    public String getCountry1() {
-        return country1;
-    }
+    public String getCountry1() {return country1;}
 
     public void setCountry1(String country1) {
         this.country1 = country1;
     }
 
-    public String getRegion() {
-        return region;
-    }
+    public String getRegion() {return region;}
 
     public void setRegion(String region) {
         this.region = region;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() {return password;}
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
+    public String getPasswordConfirm() {return passwordConfirm;}
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
+    public void setPasswordConfirm(String passwordConfirm) {this.passwordConfirm = passwordConfirm;}
 
-    public String getFirstNameError() {
-        return FirstNameError;
-    }
+    public String getFirstNameError() {return firstNameError;}
 
     public void setFirstNameError(String firstNameError) {
-        FirstNameError = firstNameError;
+        this.firstNameError = firstNameError;
     }
 
     public String getLastNameError() {
-        return LastNameError;
+        return lastNameError;
     }
 
     public void setLastNameError(String lastNameError) {
-        LastNameError = lastNameError;
+        this.lastNameError = lastNameError;
     }
 
     public String getEmailError() {
-        return EmailError;
+        return emailError;
     }
 
     public void setEmailError(String emailError) {
-        EmailError = emailError;
+        this.emailError = emailError;
     }
 
-    public String getTelephoneError() {return TelephoneError;}
+    public String getTelephoneError() {
+        return telephoneError;
+    }
 
     public void setTelephoneError(String telephoneError) {
-        TelephoneError = telephoneError;
+        this.telephoneError = telephoneError;
     }
 
-    public String getAddress1Error() {return Address1Error;}
+    public String getAddress1Error() {
+        return address1Error;
+    }
 
     public void setAddress1Error(String address1Error) {
-        Address1Error = address1Error;
+        this.address1Error = address1Error;
     }
 
     public String getCityError() {
-        return CityError;
+        return cityError;
     }
 
     public void setCityError(String cityError) {
-        CityError = cityError;
+        this.cityError = cityError;
     }
 
     public String getStateError() {
-        return StateError;
+        return stateError;
     }
 
     public void setStateError(String stateError) {
-        StateError = stateError;
+        this.stateError = stateError;
     }
 
     public String getPasswordError() {
-        return PasswordError;
+        return passwordError;
     }
 
     public void setPasswordError(String passwordError) {
-        PasswordError = passwordError;
+        this.passwordError = passwordError;
     }
 
-    public String getPasswordConfirmError() {return PasswordConfirmError;}
+//    public String getPasswordConfirmError() {return passwordConfirmError;}
+//
+//    public void setPasswordConfirmError(String passwordConfirmError) {this.passwordConfirmError = passwordConfirmError;}
 
-    public void setPasswordConfirmError(String passwordConfirmError) {
-        PasswordConfirmError = passwordConfirmError;
-    }
 
 
     public boolean expectSuccessfulRegistration() {
 
-        if (!this.FirstNameError.trim().equalsIgnoreCase("")) {
+        if (!this.firstNameError.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.LastNameError.trim().equalsIgnoreCase("")) {
+        if (!this.lastNameError.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.EmailError.trim().equalsIgnoreCase("")) {
+        if (!this.emailError.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.TelephoneError.trim().equalsIgnoreCase("")) {
+        if (!this.telephoneError.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.Address1Error.trim().equalsIgnoreCase("")) {
+        if (!this.address1Error.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.CityError.trim().equalsIgnoreCase("")) {
+        if (!this.cityError.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.StateError.trim().equalsIgnoreCase("")) {
+        if (!this.stateError.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.PasswordError.trim().equalsIgnoreCase("")) {
+        if (!this.passwordError.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.PasswordConfirmError.trim().equalsIgnoreCase("")) {
-            return false;
-        }
+//        if (!this.passwordConfirmError.trim().equalsIgnoreCase("")) {
+//            return false;
+//        }
             return true;
         }
 }

@@ -3,6 +3,7 @@ package ro.siit.tau.gr4.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.Select;
 import ro.siit.tau.gr4.models.RegistrationModel;
 
 public class RegistrationPage {
@@ -45,10 +46,10 @@ public class RegistrationPage {
     @FindBy(how = How.ID, using = "input-password")
     private WebElement password1Field;
 
-    @FindBy(how = How.ID, using = "Password Confirm")
+    @FindBy(how = How.LINK_TEXT, using = "Password confirmation does not match password!")
     private WebElement passwordConfirmField;
 
-    @FindBy(how = How.NAME, using = "//input[@name='agree']")
+    @FindBy(how = How.XPATH, using = "//input[@name='agree' and @type='checkbox']")
     private WebElement agreeButton;
 
     @FindBy(how = How.XPATH, using = "//input[@value='Continue']")
@@ -111,22 +112,21 @@ public class RegistrationPage {
         city1Field.sendKeys(registrationModel.getCity1());
         postcodeField.clear();
         postcodeField.sendKeys(registrationModel.getPostcode());
-        country1Field.clear();
+//        country1Field.clear();
         country1Field.sendKeys(registrationModel.getCountry1());
-        regionField.clear();
+//        regionField.clear();
         regionField.sendKeys(registrationModel.getRegion());
         password1Field.clear();
         password1Field.sendKeys(registrationModel.getPassword());
-        passwordConfirmField.clear();
-        passwordConfirmField.sendKeys(registrationModel.getPasswordConfirm());
+//        passwordConfirmField.clear();
+//        passwordConfirmField.sendKeys(registrationModel.getPasswordConfirm());
+
         agreeButton.click();
         submitButton.click();
 
     }
 
-    public WebElement getFirstNameError() {
-        return actualFirstNameError;
-    }
+    public WebElement getFirstNameError() {return actualFirstNameError;}
 
     public WebElement getLastNameError() {
         return actualLastNameError;
@@ -149,5 +149,18 @@ public class RegistrationPage {
     public WebElement getPasswordError() {return actualPasswordError;}
 
     public WebElement getPasswordConfirmError() {return actualPasswordConfirmError;}
+
+    public void setCountryRegion(String country, String region) throws InterruptedException {
+
+        Select dd = new Select(country1Field);
+        dd.selectByVisibleText(country);
+        //dd.selectByValue(country);
+        Thread.sleep(1000);
+
+        Select mm = new Select(regionField);
+        mm.selectByVisibleText(region);
+        //mm.selectByValue(region);
+    }
 }
+
 
