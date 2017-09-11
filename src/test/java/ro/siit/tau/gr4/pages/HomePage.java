@@ -16,7 +16,7 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "//*[@id=\"cart\"]")
     private WebElement cartTotalButton;
 
-    @FindBy(how = How.PARTIAL_LINK_TEXT, using = "View Cart")
+    @FindBy(how = How.CSS, using = "a[href*='route=checkout/cart']")
     private WebElement viewCartButton;
 
     @FindBy(how = How.XPATH, using = "//div[@class='container']/div[@class='alert alert-success']")
