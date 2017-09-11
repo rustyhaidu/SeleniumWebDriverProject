@@ -75,7 +75,7 @@ public class CartPage {
 
     public WebElement getQuantityField(String product){
         WebElement cartRow = this.getCartRow(product);
-        return cartRow.findElement(By.xpath("//input[@type='text' and contains(@name,'quantity')]"));
+        return cartRow.findElement(By.xpath(".//input[@type='text' and contains(@name,'quantity')]"));
     }
 
     /*public WebElement getQuantityField(String product){
