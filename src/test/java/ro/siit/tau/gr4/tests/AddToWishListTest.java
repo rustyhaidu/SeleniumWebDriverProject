@@ -45,11 +45,12 @@ public class AddToWishListTest extends BaseTest{
                             .append(product1)
                             .append(" to your wish list!\n" +
                                 "×").toString(),
-                        "check message");
+                        "check success message");
 
         categoryPage.clickCategory("Cameras", driver);
         categoryPage.clickProduct("Nikon D300", driver);
         String product2 = productPage.getProductTitle("h1", driver).getText();
+
         productPage.clickAddToWishListButton();
 
                 Assert.assertEquals(homePage.getSuccessMessage().getText(),
@@ -57,21 +58,27 @@ public class AddToWishListTest extends BaseTest{
                         .append(product2)
                         .append(" to your wish list!\n" +
                             "×").toString(),
-                    "check message");
-        productPage.goToWishList();
+                    "check success message");
 
+        productPage.goToWishList();
         loginPage.loginFromWishList("abcd@yahoo.com", "Password");
+
                     Assert.assertEquals(wishListPage.getWishListTitle(),
                         "My Wish List",
                         "check wish list title");
 
-        wishListPage.getRemoveBtn("Canon EOS 5D").click();
+        /*wishListPage.getRemoveBtn("Nikon D300").click();*/
         wishListPage.getAddToCartBtn("Nikon D300").click();
 
-
-                    Assert.assertEquals(wishListPage.getListOfProducts("Canon EOS 5D").isEmpty(),
+                    /*Assert.assertEquals(wishListPage.verifyElementIsNotListed("Nikon D300").isEmpty(),
                         true,
-                        "check if product was removed");
+                        "check if product was removed");*/
+
+        homePage.clickViewCartBtn();
+
+        Assert.assertEquals(categoryPage.getProduct("Nikon D300", driver).isDisplayed(),
+            true,
+            "check if product was added in cart");
 
 
 
