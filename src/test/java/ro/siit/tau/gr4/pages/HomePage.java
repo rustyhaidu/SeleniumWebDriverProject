@@ -96,22 +96,5 @@ public class HomePage {
         searchButton.click();
     }
 
-   /* public void clickLinkByHref(String href, WebDriver driver) {
-        List<WebElement> anchors = driver.findElements(By.tagName("a"));
-        Iterator<WebElement> i = anchors.iterator();
-        String anchorAttribute;
-        while (i.hasNext()) {
-            WebElement anchor = i.next();
-            anchorAttribute = anchor.getAttribute("href");
-            if (anchorAttribute.contains(href)) {
-                anchor.click();
-                break;
-            }
-        }
-    }*/
-
-    /*public void clickViewCart(String href, WebDriver driver){
-        clickLinkByHref(href, driver);
-    }*/
 
 }
