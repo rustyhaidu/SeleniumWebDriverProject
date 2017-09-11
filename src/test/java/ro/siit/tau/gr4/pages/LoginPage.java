@@ -27,6 +27,9 @@ public class LoginPage {
     @FindBy(how = How.XPATH, using = "//a[@title='My Account']")
     private WebElement myAccount;
 
+    @FindBy(how = How.XPATH, using = "//*[@id=\'top-links\']/ul/li[2]/ul/li[5]/a")
+    private WebElement logout;
+
 
     public void login(String emailAddress, String password){
         myAccount.click();
@@ -52,6 +55,14 @@ public class LoginPage {
     public String getGeneralError(){
 
         return generalErrorField.getText();
+    }
+
+    public void myAccountLogout(){
+        myAccount.click();
+    }
+
+    public WebElement getLogout(){
+        return  logout;
     }
 
 }
