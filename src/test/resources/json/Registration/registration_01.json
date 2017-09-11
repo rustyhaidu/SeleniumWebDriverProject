@@ -1,0 +1,23 @@
+{
+  "firstName":"",
+  "lastName":"",
+  "email":"",
+  "telephone":"",
+  "fax":"",
+  "company":"",
+  "address1":"",
+  "address2":"",
+  "city1":"",
+  "postcode":"",
+  "country1":"Andorra",
+  "region":"Canillo",
+  "password":"1",
+  "firstNameError":"First Name must be between 1 and 32 characters!",
+  "lastNameError":"Last Name must be between 1 and 32 characters!",
+  "emailError":"E-Mail Address does not appear to be valid!",
+  "telephoneError":"Telephone must be between 3 and 32 characters!",
+  "address1Error":"Address 1 must be between 3 and 128 characters!",
+  "cityError":"City must be between 2 and 128 characters!",
+  "stateError":"Please select a region / state!",
+  "passwordError":"Password must be between 4 and 20 characters!"
+}
