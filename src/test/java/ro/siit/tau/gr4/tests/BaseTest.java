@@ -33,7 +33,7 @@ public class BaseTest {
         driver.quit();
     }
 
-    public void clickLinkByHref(String href) {
+   /* public void clickLinkByHref(String href) {
         List<WebElement> anchors = driver.findElements(By.tagName("a"));
         Iterator<WebElement> i = anchors.iterator();
 
@@ -44,9 +44,9 @@ public class BaseTest {
                 break;
             }
         }
-    }
+    }*/
 
-    public void getLinkByHref(String href) {
+    /*public void getLinkByHref(String href) {
         List<WebElement> anchors = driver.findElements(By.tagName("a"));
         Iterator<WebElement> i = anchors.iterator();
 
@@ -57,7 +57,7 @@ public class BaseTest {
                 break;
             }
         }
-    }
+    }*/
 
     public List<String> getNameListOfItems(String href) {
         List<String> nameList = new ArrayList<>();

@@ -96,7 +96,7 @@ public class HomePage {
         searchButton.click();
     }
 
-    public void clickLinkByHref(String href, WebDriver driver) {
+   /* public void clickLinkByHref(String href, WebDriver driver) {
         List<WebElement> anchors = driver.findElements(By.tagName("a"));
         Iterator<WebElement> i = anchors.iterator();
         String anchorAttribute;
@@ -108,10 +108,10 @@ public class HomePage {
                 break;
             }
         }
-    }
+    }*/
 
-    public void clickViewCart(String href, WebDriver driver){
+    /*public void clickViewCart(String href, WebDriver driver){
         clickLinkByHref(href, driver);
-    }
+    }*/
 
 }
