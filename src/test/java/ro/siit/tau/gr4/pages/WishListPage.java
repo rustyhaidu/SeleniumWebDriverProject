@@ -20,19 +20,25 @@ public class WishListPage {
     @FindBy(how = How.TAG_NAME, using = "h2")
     private WebElement wishListTitle;
 
-    public WebElement getWishlistRow(String product){
-        return (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[descendant::a[text()='"
-                + product + "']]")));
+    @FindBy(how = How.XPATH, using = "//div[@class='container']/div[@class='alert alert-success']")
+    private WebElement sucessMessage;
+
+    public String getSuccessMessage(){
+        return sucessMessage.getText();
     }
 
-    /*public WebElement getRemoveBtn(String product){
+    public WebElement getWishlistRow(String product){
+        return driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table/tbody/tr[descendant::a[text()='"
+            + product + "']]"));
+    }
+
+    public void clickRemoveBtn(String product){
         WebElement row = this.getWishlistRow(product);
-        return row.findElement(By.cssSelector("a[data-original-title^='Remove']"));
-    }*/
+        row.findElement(By.xpath(".//a[@data-original-title='Remove']")).click();
+    }
     public WebElement getAddToCartBtn(String product){
         WebElement row = this.getWishlistRow(product);
-        return row.findElement(By.xpath("//button[@type='button' and contains(@data-original-title,'Add to Cart')]"));
+        return row.findElement(By.xpath(".//button[@type='button' and @data-original-title='Add to Cart']"));
     }
 
     public String getWishListTitle(){

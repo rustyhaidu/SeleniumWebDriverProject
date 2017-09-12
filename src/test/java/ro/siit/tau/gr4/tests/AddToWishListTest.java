@@ -26,16 +26,16 @@ public class AddToWishListTest extends BaseTest{
         wishListPage.setDriver(driver);
 
         //go to category
-        categoryPage.clickCategory("Cameras", driver);
+        categoryPage.clickCategory("Tablets", driver);
 
-                    Assert.assertEquals(categoryPage.goToCategory("Cameras", driver).getText(),
-                        "Cameras",
+                    Assert.assertEquals(categoryPage.goToCategory("Tablets", driver).getText(),
+                        "Tablets",
                         "check category page title");
 
-        categoryPage.clickProduct("Canon EOS 5D", driver);
+        categoryPage.clickProduct("Samsung Galaxy Tab 10.1", driver);
         String product1 = productPage.getProductTitle("h1", driver).getText();
                     Assert.assertEquals(product1,
-                        "Canon EOS 5D",
+                        "Samsung Galaxy Tab 10.1",
                         "check product page title");
 
         productPage.clickAddToWishListButton();
@@ -67,20 +67,23 @@ public class AddToWishListTest extends BaseTest{
                         "My Wish List",
                         "check wish list title");
 
-        /*wishListPage.getRemoveBtn("Nikon D300").click();*/
+        wishListPage.clickRemoveBtn("Samsung Galaxy Tab 10.1");
+
+                    Assert.assertEquals(wishListPage.getSuccessMessage(),
+                        "Success: You have modified your wish list!\n" +
+                            "×",
+                        "verify success message");
+
         wishListPage.getAddToCartBtn("Nikon D300").click();
 
-                    /*Assert.assertEquals(wishListPage.verifyElementIsNotListed("Nikon D300").isEmpty(),
-                        true,
-                        "check if product was removed");*/
+        Assert.assertEquals(wishListPage.verifyElementIsNotListed("Samsung Galaxy Tab 10.1").isEmpty(),
+            true,
+            "check if product was removed");
 
         homePage.clickViewCartBtn();
 
-        Assert.assertEquals(categoryPage.getProduct("Nikon D300", driver).isDisplayed(),
+        Assert.assertEquals(categoryPage.verifyProductIsDisplayed("Nikon D300", driver),
             true,
             "check if product was added in cart");
-
-
-
     }
 }

@@ -34,6 +34,11 @@ public class CategoryPage {
         return productName;
     }
 
+    public boolean verifyProductIsDisplayed(String product, WebDriver driver){
+        WebElement productName = driver.findElement(By.partialLinkText(product));
+        return productName.isDisplayed();
+    }
+
     public void clickProduct(String product, WebDriver driver) {
         WebElement productName = driver.findElement(By.partialLinkText(product));
         productName.click();
