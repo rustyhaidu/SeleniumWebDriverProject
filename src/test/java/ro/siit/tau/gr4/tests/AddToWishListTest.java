@@ -18,9 +18,7 @@ public class AddToWishListTest extends BaseTest{
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
         CategoryPage categoryPage = PageFactory.initElements(driver, CategoryPage.class);
-        CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-        LoginTest loginTest = PageFactory.initElements(driver, LoginTest.class);
         WishListPage wishListPage = PageFactory.initElements(driver, WishListPage.class);
 
         wishListPage.setDriver(driver);
