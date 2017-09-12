@@ -36,16 +36,16 @@ public class WishListPage {
         WebElement row = this.getWishlistRow(product);
         row.findElement(By.xpath(".//a[@data-original-title='Remove']")).click();
     }
-    public WebElement getAddToCartBtn(String product){
+    public void clickAddToCartBtn(String product){
         WebElement row = this.getWishlistRow(product);
-        return row.findElement(By.xpath(".//button[@type='button' and @data-original-title='Add to Cart']"));
+        row.findElement(By.xpath(".//button[@type='button' and @data-original-title='Add to Cart']")).click();
     }
 
     public String getWishListTitle(){
         return wishListTitle.getText();
     }
 
-    public List<WebElement> verifyElementIsNotListed(String product){
+    public List<WebElement> verifyListedElement(String product){
         List<WebElement> listOfItems = driver.findElements(By.cssSelector("a[href*='" + product + "']"));
         return listOfItems;
     }

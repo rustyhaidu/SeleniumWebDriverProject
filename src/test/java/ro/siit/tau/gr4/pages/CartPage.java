@@ -36,16 +36,16 @@ public class CartPage {
         this.updateButton = updateButton;
     }
 
-    public WebElement getCheckoutTitle() {
-        return checkoutTitle;
+    public String getCheckoutTitle() {
+        return checkoutTitle.getText();
     }
 
     public void setCheckoutTitle(WebElement checkoutTitle) {
         this.checkoutTitle = checkoutTitle;
     }
 
-    public WebElement getCartBreadcrumb() {
-        return cartBreadcrumb;
+    public String getCartBreadcrumbText() {
+        return cartBreadcrumb.getText();
     }
 
     public void setCartBreadcrumb(WebElement cartBreadcrumb) {

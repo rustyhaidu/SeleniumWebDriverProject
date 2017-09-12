@@ -28,12 +28,12 @@ public class AddToWishListTest extends BaseTest{
         //go to category
         categoryPage.clickCategory("Tablets", driver);
 
-                    Assert.assertEquals(categoryPage.goToCategory("Tablets", driver).getText(),
+                    Assert.assertEquals(categoryPage.getCategoryText("Tablets", driver),
                         "Tablets",
                         "check category page title");
 
         categoryPage.clickProduct("Samsung Galaxy Tab 10.1", driver);
-        String product1 = productPage.getProductTitle("h1", driver).getText();
+        String product1 = productPage.getProductTitle("h1", driver);
                     Assert.assertEquals(product1,
                         "Samsung Galaxy Tab 10.1",
                         "check product page title");
@@ -49,7 +49,7 @@ public class AddToWishListTest extends BaseTest{
 
         categoryPage.clickCategory("Cameras", driver);
         categoryPage.clickProduct("Nikon D300", driver);
-        String product2 = productPage.getProductTitle("h1", driver).getText();
+        String product2 = productPage.getProductTitle("h1", driver);
 
         productPage.clickAddToWishListButton();
 
@@ -74,9 +74,9 @@ public class AddToWishListTest extends BaseTest{
                             "×",
                         "verify success message");
 
-        wishListPage.getAddToCartBtn("Nikon D300").click();
+        wishListPage.clickAddToCartBtn("Nikon D300");
 
-        Assert.assertEquals(wishListPage.verifyElementIsNotListed("Samsung Galaxy Tab 10.1").isEmpty(),
+        Assert.assertEquals(wishListPage.verifyListedElement("Samsung Galaxy Tab 10.1").isEmpty(),
             true,
             "check if product was removed");
 
