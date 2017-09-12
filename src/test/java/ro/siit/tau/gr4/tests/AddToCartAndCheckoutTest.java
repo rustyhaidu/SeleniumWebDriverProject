@@ -27,7 +27,6 @@ public class AddToCartAndCheckoutTest extends BaseTest {
 
         //go to category
         categoryPage.clickCategory("Phones & PDAs", driver);
-
                     Assert.assertEquals(categoryPage.getCategoryTitle(),
                         "Phones & PDAs",
                         "check category page title");
@@ -50,17 +49,16 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         //go to Cart
         homePage.clickCartTotalButton();
         homePage.clickViewCartBtn();
-
                     Assert.assertEquals(cartPage.getCartBreadcrumbText(),
                         "Shopping Cart",
                         "check if cart page is displayed");
                     Assert.assertEquals(categoryPage.getProductTitle("iPhone", driver),
                         "iPhone",
                         "check if product is in cart");
-        //change quantity for prod. 1
+
+        //change quantity for a prod.
         cartPage.getQuantityField("iPhone").clear();
         cartPage.getQuantityField("iPhone").sendKeys("4");
-
         cartPage.clickUpdateButton();
                     Assert.assertEquals(cartPage.readQuantity("iPhone"),
                         "4",
@@ -68,6 +66,7 @@ public class AddToCartAndCheckoutTest extends BaseTest {
                     Assert.assertEquals(cartPage.readQuantity("HTC Touch HD"),
                         "1",
                         "check if qty is set");
+
         //checkout
         cartPage.clickCheckoutButton();
                     Assert.assertEquals(cartPage.getCheckoutTitle(),
