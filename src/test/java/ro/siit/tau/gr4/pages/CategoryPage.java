@@ -29,9 +29,14 @@ public class CategoryPage {
         this.sortBy = sortBy;
     }
 
-    public WebElement getProduct(String product, WebDriver driver) {
+    public String getProductTitle(String product, WebDriver driver) {
         WebElement productName = driver.findElement(By.partialLinkText(product));
-        return productName;
+        return productName.getText();
+    }
+
+    public boolean verifyProductIsDisplayed(String product, WebDriver driver){
+        WebElement productName = driver.findElement(By.partialLinkText(product));
+        return productName.isDisplayed();
     }
 
     public void clickProduct(String product, WebDriver driver) {
@@ -39,9 +44,9 @@ public class CategoryPage {
         productName.click();
     }
 
-    public WebElement goToCategory(String category, WebDriver driver){
+    public String getCategoryText(String category, WebDriver driver){
         WebElement categoryName = driver.findElement(By.linkText(category));
-        return categoryName;
+        return categoryName.getText();
     }
 
     public void clickCategory(String category, WebDriver driver){

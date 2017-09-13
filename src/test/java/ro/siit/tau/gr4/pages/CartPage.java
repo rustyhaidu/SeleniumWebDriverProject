@@ -9,9 +9,6 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Iterator;
-import java.util.List;
-
 public class CartPage {
 
     WebDriver driver;
@@ -39,16 +36,16 @@ public class CartPage {
         this.updateButton = updateButton;
     }
 
-    public WebElement getCheckoutTitle() {
-        return checkoutTitle;
+    public String getCheckoutTitle() {
+        return checkoutTitle.getText();
     }
 
     public void setCheckoutTitle(WebElement checkoutTitle) {
         this.checkoutTitle = checkoutTitle;
     }
 
-    public WebElement getCartBreadcrumb() {
-        return cartBreadcrumb;
+    public String getCartBreadcrumbText() {
+        return cartBreadcrumb.getText();
     }
 
     public void setCartBreadcrumb(WebElement cartBreadcrumb) {
@@ -58,18 +55,6 @@ public class CartPage {
     public void clickCheckoutButton() {
         checkoutButton.click();
     }
-
-  /*  public WebElement getQuantityField(String product) {
-        WebElement productInCart = driver.findElement(By.xpath("//tr[descendant::a[text()='" +
-            product + "']]//td[4]//input[@type='text']"));
-        return productInCart;
-    }
-
-   /* public WebElement getCartRow(String product){
-        String descendent = "//form/div[@class='table-responsive']/table[@class='table table-bordered']/tbody/tr[descendant::a[text()='" + product + "']]";
-        return (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(descendent)));
-    }*/
 
    public WebElement getCartRow(String product){
         return (new WebDriverWait( driver, 3))
@@ -82,27 +67,10 @@ public class CartPage {
         return cartRow.findElement(By.xpath(".//input[@type='text' and contains(@name,'quantity')]"));
     }
 
-    /*public WebElement getQuantityField(String product){
-        WebElement cartRow = this.getCartRow(product);
-        return cartRow.findElement(By.cssSelector("input[name^='quantity']"));
-    }*/
-
     public String readQuantity(String product){
         WebElement quantityField = this.getQuantityField(product);
         return quantityField.getAttribute("value");
     }
 
-    public void clickLinkByHref(String href) {
-        List<WebElement> anchors = driver.findElements(By.tagName("a"));
-        Iterator<WebElement> i = anchors.iterator();
-
-        while (i.hasNext()) {
-            WebElement anchor = i.next();
-            if (anchor.getAttribute("href").contains(href)) {
-                anchor.click();
-                break;
-            }
-        }
-    }
 
 }

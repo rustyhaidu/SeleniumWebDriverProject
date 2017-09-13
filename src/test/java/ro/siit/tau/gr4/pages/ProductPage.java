@@ -29,8 +29,8 @@ public class ProductPage {
         WishList.click();
     }
 
-    public WebElement getAddToCartButton() {
-        return addToCartButton;
+    public void clickAddToCartButton() {
+        addToCartButton.click();
     }
 
     public void setAddToCartButton(WebElement addToCartButton) {
@@ -41,9 +41,9 @@ public class ProductPage {
         return productName;
     }*/
 
-    public WebElement getProductTitle(String product, WebDriver driver){
+    public String getProductTitle(String product, WebDriver driver){
         WebElement productTitle = driver.findElement(By.tagName(product));
-        return productTitle;
+        return productTitle.getText();
     }
 
 
