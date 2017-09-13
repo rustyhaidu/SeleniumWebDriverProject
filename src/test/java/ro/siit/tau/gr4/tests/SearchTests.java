@@ -63,7 +63,7 @@ public class SearchTests extends BaseTest {
             buttonList.get(i).click();
             itemTitle = h4List.get(i).getText();
             Thread.sleep(1000);
-            successMessage = homePage.getSuccessMessage().getText().replace("×", "").trim();
+            successMessage = homePage.getSuccessMessageText().replace("×", "").trim();
 
             //"Checking that the Success message contains the item added to cart"
             Assert.assertEquals(successMessage,
