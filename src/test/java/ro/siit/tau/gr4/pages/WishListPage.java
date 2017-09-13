@@ -26,7 +26,7 @@ public class WishListPage {
     }
 
     public WebElement getWishlistRow(String product){
-        return driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table/tbody/tr[descendant::a[text()='"
+        return driver.findElement(By.xpath("//tr[descendant::a[text()='"
             + product + "']]"));
     }
 
