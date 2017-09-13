@@ -1,19 +1,14 @@
 package ro.siit.tau.gr4.tests;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Touch;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ro.siit.tau.gr4.pages.*;
 
-import java.util.List;
-
 public class AddToWishListTest extends BaseTest{
 
     @Test
-    public void AddToWishList(){
+    public void AddToWishListTest(){
 
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);

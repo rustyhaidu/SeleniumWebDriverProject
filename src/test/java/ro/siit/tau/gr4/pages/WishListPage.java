@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class WishListPage {
     }
 
     public WebElement getWishlistRow(String product){
-        return driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table/tbody/tr[descendant::a[text()='"
+        return driver.findElement(By.xpath("//tr[descendant::a[text()='"
             + product + "']]"));
     }
 
@@ -49,10 +47,5 @@ public class WishListPage {
         List<WebElement> listOfItems = driver.findElements(By.cssSelector("a[href*='" + product + "']"));
         return listOfItems;
     }
-
-
-
-
-
 
 }
