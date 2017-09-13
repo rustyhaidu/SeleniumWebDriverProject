@@ -1,23 +1,18 @@
 package ro.siit.tau.gr4.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ro.siit.tau.gr4.pages.CartPage;
 import ro.siit.tau.gr4.pages.CategoryPage;
 import ro.siit.tau.gr4.pages.HomePage;
 import ro.siit.tau.gr4.pages.ProductPage;
-import ro.siit.tau.gr4.utils.Utility;
 
 public class AddToCartAndCheckoutTest extends BaseTest {
 
     @Test
-    public void addToCart() {
+    public void addToCartTest() {
 
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
