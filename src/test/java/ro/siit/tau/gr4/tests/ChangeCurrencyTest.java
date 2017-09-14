@@ -21,8 +21,15 @@ public class ChangeCurrencyTest extends BaseTest {
 
         Assert.assertEquals(homePage.getTextFromCartTotalButton().contains("£"),
             true,
-            "check ");
+            "check ................");
+
+        Assert.assertEquals( homePage.getProductCurrencySymbol("MacBook").contains("£"),
+            true,
+            "check .............");
+       ;
 
         }
+
+
 
 }
