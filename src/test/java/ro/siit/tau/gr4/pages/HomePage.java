@@ -113,12 +113,20 @@ public class HomePage {
     }
 
     public WebElement getPrecedingTable(String header){
-        return driver.findElement(By.xpath("//table[@class='table table-bordered' and preceding-sibling::h1[text()='"+header+"']])"));
+        return driver.findElement(By.xpath("//table[@class='table table-bordered' and preceding-sibling::h1[text()='"+header+"']]"));
     }
 
     public WebElement getPrecedingTableData(String header, int row, int column){
         return getPrecedingTable(header).findElement(By.xpath(".//[" + row + "]/td[" + column + "]"));
 
+    }
+
+    public int getPrecedingTableRowCount(String header){
+        return getPrecedingTable(header).findElements(By.xpath(".//tbody[1]/tr")).size();
+    }
+
+    public int getPrecedingTableColumnCount(String header, int row){
+        return getPrecedingTable(header).findElements(By.xpath(".//tbody[1]/tr["+row+"]/td")).size();
     }
 
     public List<WebElement> getListOfProducts() {

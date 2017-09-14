@@ -60,7 +60,7 @@ public class CompareProductsTest extends BaseTest {
 
         System.out.println(homePage.getProductComparisonLink().getText());
         homePage.getProductComparisonLink().click();
-        int columnCount = homePage.getProductComparisonTableColumnCount();
+        int columnCount = homePage.getPrecedingTableColumnCount("Product Comparison",1);
 
         for (int i = 2; i <= columnCount; i++) {
             WebElement tableData = homePage.getTableData(1, i);
