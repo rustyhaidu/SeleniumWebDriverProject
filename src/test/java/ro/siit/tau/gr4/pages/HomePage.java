@@ -9,7 +9,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Iterator;
+
 import java.util.List;
 
 public class HomePage {
@@ -58,14 +58,18 @@ public class HomePage {
 
     @FindBy(how = How.XPATH, using = "//*[@id='form-currency']/div/button/strong")
     private WebElement currencySymbol;
+/*
+
+    @FindBy(how = How.XPATH, using = "//div[descendant::a[text()='MacBook']]")
+    WebElement productCaption;*/
 
     public String readCurrencySymbol(){
         return currencySymbol.getText();
     }
 
-    public WebElement getCurrencyButton() {
+    /*public WebElement getCurrencyButton() {
         return currencyButton;
-    }
+    }*/
 
     public void setCurrency(String currency, WebDriver driver){
         driver.findElement(By.cssSelector("button[name='" + currency + "']")).click();
@@ -196,8 +200,10 @@ public class HomePage {
         searchButton.click();
     }
 
-    public WebElement getProductCaption(String product, WebDriver driver){
-        WebElement productCaption = driver.findElement(By.xpath("//div[descendant::a[text()='" + product + "']]"));
+
+    public WebElement getProductCaption(String product){
+        String xpath = "//div[@class='caption' and descendant::a[text()='" + product + "']]";
+        WebElement productCaption = driver.findElement(By.xpath(xpath));
         return productCaption;
     }
 
@@ -206,13 +212,17 @@ public class HomePage {
         return productThumb;
     }
 
-    public String getProductCurrencySymbol(String product){
-        WebElement ProductCurrencySymbol = productCaption.findElement(By.className("price"));
-        return ProductCurrencySymbol.getText();
+    public String getProductPrice(String product){
+        String ProductCurrencySymbol = getProductCaption(product).findElement(By.cssSelector("p[class^='price']")).getText();
+        return ProductCurrencySymbol;
     }
 
-    @FindBy(how = How.XPATH, using = "//div[descendant::a[text()='MacBook']]")
-    WebElement productCaption;
+    public String getProductCurrencySymbol(String product){
+        String price = this.getProductPrice(product);
+        return price.replaceAll("[^£]","");
+    }
+
+
 
 
 }

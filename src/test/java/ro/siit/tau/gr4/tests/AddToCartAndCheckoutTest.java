@@ -42,7 +42,6 @@ public class AddToCartAndCheckoutTest extends BaseTest {
         productPage.clickAddToCartButton();
 
         //go to Cart
-        homePage.clickCartTotalButton();
         homePage.clickViewCartBtn();
                     Assert.assertEquals(cartPage.getCartBreadcrumbText(),
                         "Shopping Cart",

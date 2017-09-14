@@ -58,7 +58,7 @@ public class CartPage {
 
    public WebElement getCartRow(String product){
         return (new WebDriverWait( driver, 3))
-            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='table table-bordered']/tbody/tr[descendant::a[text()='"
+          .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='table table-bordered']/tbody/tr[descendant::a[text()='"
                 + product + "']]")));
     }
 

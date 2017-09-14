@@ -1,14 +1,10 @@
 package ro.siit.tau.gr4.pages;
 
-
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.ext.WEBGL_compressed_texture_s3tc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage {
 
@@ -20,6 +16,14 @@ public class ProductPage {
 
     @FindBy(how = How.ID, using = "wishlist-total")
     private WebElement WishList;
+
+
+    @FindBy(how = How.XPATH, using = "//div[@class='col-sm-4' and descendant::h2")
+    private WebElement productPrice;
+
+    public String getProductPrice(){
+        return productPrice.getText();
+    }
 
     public void clickAddToWishListButton(){
         addToWishListButton.click();
