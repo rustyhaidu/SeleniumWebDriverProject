@@ -53,6 +53,28 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "//div[@class='row']/div//div/p[@class='price']")
     private List<WebElement> priceList;
 
+    @FindBy(how = How.XPATH, using = "//span[.='Currency']")
+    private WebElement currencyButton;
+
+    @FindBy(how = How.XPATH, using = "//*[@id='form-currency']/div/button/strong")
+    private WebElement currencySymbol;
+
+    public String readCurrencySymbol(){
+        return currencySymbol.getText();
+    }
+
+    public WebElement getCurrencyButton() {
+        return currencyButton;
+    }
+
+    public void setCurrency(String currency, WebDriver driver){
+        driver.findElement(By.cssSelector("button[name='" + currency + "']")).click();
+    }
+
+    public void clickCurrencyButton(){
+        currencyButton.click();
+    }
+
     @FindBy(how = How.XPATH, using = "//div[@class='product-thumb']")
     private List<WebElement> listOfProducts;
 
@@ -133,11 +155,25 @@ public class HomePage {
         this.cartTotalButton = cartTotalButton;
     }
 
-    public void searchItem(String itemName) {
+    public void searchItem(String itemName){
         searchEdit.clear();
         searchEdit.sendKeys(itemName);
         searchButton.click();
     }
+
+
+    public WebElement getProductCaption(String product, WebDriver driver){
+        WebElement productCaption = driver.findElement(By.xpath("//div[descendant::a[text()='" + product + "']]"));
+        return productCaption;
+    }
+
+    public String getProductCurrencySymbol(String product){
+        WebElement ProductCurrencySymbol = productCaption.findElement(By.className("price"));
+        return ProductCurrencySymbol.getText();
+    }
+
+    @FindBy(how = How.XPATH, using = "//div[descendant::a[text()='MacBook']]")
+    WebElement productCaption;
 
 
 }
