@@ -102,6 +102,25 @@ public class HomePage {
                 (By.xpath("//*[@id='content']/table/tbody[1]/tr[" + row + "]/td[" + column + "]")));
     }
 
+    public int getProductComparisonTableRowCount(){
+        int rowCount = driver.findElements(By.xpath("//*[@id='content']/table/tbody[1]/tr")).size();
+        return rowCount;
+    }
+
+    public int getProductComparisonTableColumnCount(){
+        int columnCount = driver.findElements(By.xpath("//*[@id='content']/table/tbody[1]/tr[1]/td")).size();
+        return columnCount;
+    }
+
+    public WebElement getPrecedingTable(String header){
+        return driver.findElement(By.xpath("//table[@class='table table-bordered' and preceding-sibling::h1[text()='"+header+"']])"));
+    }
+
+    public WebElement getPrecedingTableData(String header, int row, int column){
+        return getPrecedingTable(header).findElement(By.xpath(".//[" + row + "]/td[" + column + "]"));
+
+    }
+
     public List<WebElement> getListOfProducts() {
         return listOfProducts;
     }
@@ -110,8 +129,16 @@ public class HomePage {
         return productList.get(index).findElement(By.cssSelector("button[data-original-title='Compare this Product']"));
     }
 
+    public WebElement getCompareButton(String product){
+        return getProductThumb(product).findElement(By.cssSelector("button[data-original-title='Compare this Product']"));
+    }
+
     public String getItemTitle(List<WebElement> productList, int index){
         return productList.get(index).findElement(By.tagName("h4")).getText();
+    }
+
+    public String getItemTitle(String product){
+        return getProductThumb(product).findElement(By.tagName("h4")).getText();
     }
 
 
@@ -161,10 +188,14 @@ public class HomePage {
         searchButton.click();
     }
 
-
     public WebElement getProductCaption(String product, WebDriver driver){
         WebElement productCaption = driver.findElement(By.xpath("//div[descendant::a[text()='" + product + "']]"));
         return productCaption;
+    }
+
+    public WebElement getProductThumb(String product){
+        WebElement productThumb = driver.findElement(By.xpath("//div[@class='product-thumb' and descendant::a[text()='"+product+"']]"));
+        return productThumb;
     }
 
     public String getProductCurrencySymbol(String product){

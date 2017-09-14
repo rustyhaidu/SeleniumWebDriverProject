@@ -4,15 +4,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ro.siit.tau.gr4.pages.HomePage;
-
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class CompareProductsTest extends BaseTest {
 
     private HomePage homePage;
+
+    @DataProvider(name = "itemToAddToCompareList")
+    public Object[][] jsonDataProviderCollection() {
+
+        return new Object[][]{
+            {"Canon EOS 5D","HP LP3065","HTC Touch HD","iMac","iPhone"}
+        };
+    }
 
     @BeforeMethod
     public void setCompareTest() {
@@ -20,8 +27,8 @@ public class CompareProductsTest extends BaseTest {
         homePage.setDriver(driver);
     }
 
-    @Test
-    public void compareItemsTest() throws InterruptedException {
+    @Test(dataProvider = "itemToAddToCompareList")
+    public void compareItemsTest(String[] arrayOfItems) throws InterruptedException {
 
         // Make a search by entering the space keyboard character
         homePage.searchItem(" ");
@@ -30,13 +37,12 @@ public class CompareProductsTest extends BaseTest {
         String expectedItemTitle;
 
         // Get the list of all products
-        List<WebElement> listOfProducts = homePage.getListOfProducts();
         List<String> itemTitles = new LinkedList<>();
 
-        for (int i = 1; i < 5; i++) {
+        for (int i = 0; i < arrayOfItems.length-1; i++) {
 
-            WebElement addToCompareButton = homePage.getCompareButton(listOfProducts, i);
-            String itemTitle = homePage.getItemTitle(listOfProducts, i);
+            WebElement addToCompareButton = homePage.getCompareButton(arrayOfItems[i]);
+            String itemTitle = homePage.getItemTitle(arrayOfItems[i]);
             itemTitles.add(itemTitle);
             System.out.println("Element to be added: " + itemTitle);
             addToCompareButton.click();
@@ -54,8 +60,9 @@ public class CompareProductsTest extends BaseTest {
 
         System.out.println(homePage.getProductComparisonLink().getText());
         homePage.getProductComparisonLink().click();
+        int columnCount = homePage.getProductComparisonTableColumnCount();
 
-        for (int i = 2; i < 6; i++) {
+        for (int i = 2; i <= columnCount; i++) {
             WebElement tableData = homePage.getTableData(1, i);
             productName = tableData.getText();
             expectedItemTitle = itemTitles.get(i - 2);
@@ -67,8 +74,8 @@ public class CompareProductsTest extends BaseTest {
         // Perform the search again to add another item to the comparison
         homePage.searchItem(" ");
 
-        WebElement addToCompareButton = homePage.getCompareButton(listOfProducts, 5);
-        String itemTitle = homePage.getItemTitle(listOfProducts, 5);
+        WebElement addToCompareButton = homePage.getCompareButton(arrayOfItems[4]);
+        String itemTitle = homePage.getItemTitle(arrayOfItems[4]);
         itemTitles.add(itemTitle);
         addToCompareButton.click();
         Thread.sleep(1000);
@@ -86,7 +93,7 @@ public class CompareProductsTest extends BaseTest {
         homePage.getProductComparisonLink().click();
 
         // Get the table data and their text again to check changes
-        for (int i = 2; i < 6; i++) {
+        for (int i = 2; i < columnCount; i++) {
             WebElement tableData = homePage.getTableData(1, i);
             productName = tableData.getText();
             expectedItemTitle = itemTitles.get(i - 1);
