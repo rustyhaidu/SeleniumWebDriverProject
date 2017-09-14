@@ -9,7 +9,7 @@ import ro.siit.tau.gr4.pages.CategoryPage;
 import ro.siit.tau.gr4.pages.HomePage;
 import ro.siit.tau.gr4.pages.ProductPage;
 
-public class AddToCartAndCheckoutTest extends BaseTest {
+public class AddToCartTest extends BaseTest {
 
     @Test
     public void addToCartTest() {

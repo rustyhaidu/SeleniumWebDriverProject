@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CartPage {
 
     WebDriver driver;
-
     public void setDriver(WebDriver driver){
         this.driver=driver;}
 
@@ -32,24 +31,12 @@ public class CartPage {
         updateButton.click();
     }
 
-    public void setUpdateButton(WebElement updateButton) {
-        this.updateButton = updateButton;
-    }
-
     public String getCheckoutTitle() {
         return checkoutTitle.getText();
     }
 
-    public void setCheckoutTitle(WebElement checkoutTitle) {
-        this.checkoutTitle = checkoutTitle;
-    }
-
     public String getCartBreadcrumbText() {
         return cartBreadcrumb.getText();
-    }
-
-    public void setCartBreadcrumb(WebElement cartBreadcrumb) {
-        this.cartBreadcrumb = cartBreadcrumb;
     }
 
     public void clickCheckoutButton() {
@@ -59,7 +46,7 @@ public class CartPage {
    public WebElement getCartRow(String product){
         return (new WebDriverWait( driver, 3))
           .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='table table-bordered']/tbody/tr[descendant::a[text()='"
-                + product + "']]")));
+              +product+"']]")));
     }
 
     public WebElement getQuantityField(String product){

@@ -15,7 +15,6 @@ import java.util.List;
 public class HomePage {
 
     WebDriver driver;
-
     public void setDriver(WebDriver driver) {
         this.driver = driver;
     }
@@ -58,18 +57,16 @@ public class HomePage {
 
     @FindBy(how = How.XPATH, using = "//*[@id='form-currency']/div/button/strong")
     private WebElement currencySymbol;
-/*
 
-    @FindBy(how = How.XPATH, using = "//div[descendant::a[text()='MacBook']]")
-    WebElement productCaption;*/
+    @FindBy(how = How.XPATH, using = "//div[@class='product-thumb']")
+    private List<WebElement> listOfProducts;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='alert alert-success']/a[contains(text(),'product comparison')]")
+    WebElement productComparisonLink;
 
     public String readCurrencySymbol(){
         return currencySymbol.getText();
     }
-
-    /*public WebElement getCurrencyButton() {
-        return currencyButton;
-    }*/
 
     public void setCurrency(String currency, WebDriver driver){
         driver.findElement(By.cssSelector("button[name='" + currency + "']")).click();
@@ -78,12 +75,6 @@ public class HomePage {
     public void clickCurrencyButton(){
         currencyButton.click();
     }
-
-    @FindBy(how = How.XPATH, using = "//div[@class='product-thumb']")
-    private List<WebElement> listOfProducts;
-
-    @FindBy(how = How.XPATH, using = "//div[@class='alert alert-success']/a[contains(text(),'product comparison')]")
-    WebElement productComparisonLink;
 
     public WebElement getSuccessMessage() {
         return successMessage;
@@ -153,7 +144,6 @@ public class HomePage {
         return getProductThumb(product).findElement(By.tagName("h4")).getText();
     }
 
-
     public void clickViewCartBtn() {
         viewCartButton.click();
     }
@@ -200,7 +190,6 @@ public class HomePage {
         searchButton.click();
     }
 
-
     public WebElement getProductCaption(String product){
         String xpath = "//div[@class='caption' and descendant::a[text()='" + product + "']]";
         WebElement productCaption = driver.findElement(By.xpath(xpath));
@@ -208,21 +197,18 @@ public class HomePage {
     }
 
     public WebElement getProductThumb(String product){
-        WebElement productThumb = driver.findElement(By.xpath("//div[@class='product-thumb' and descendant::a[text()='"+product+"']]"));
+        WebElement productThumb = driver.findElement(By.xpath("//div[@class='product-thumb' and descendant::a[text()='"
+            +product+"']]"));
         return productThumb;
     }
 
     public String getProductPrice(String product){
-        String ProductCurrencySymbol = getProductCaption(product).findElement(By.cssSelector("p[class^='price']")).getText();
-        return ProductCurrencySymbol;
+        String productCurrencySymbol = getProductCaption(product).findElement(By.cssSelector("p[class^='price']")).getText();
+        return productCurrencySymbol;
     }
 
     public String getProductCurrencySymbol(String product){
         String price = this.getProductPrice(product);
         return price.replaceAll("[^£]","");
     }
-
-
-
-
 }
