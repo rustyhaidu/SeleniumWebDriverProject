@@ -6,17 +6,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Iterator;
+
 import java.util.List;
 
-public class HomePage {
-
+public class HomePage extends BasePage{
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"cart\"]")
     private WebElement cartTotalButton;
 
-    @FindBy(how = How.PARTIAL_LINK_TEXT, using = "View Cart")
+    @FindBy(how = How.CSS, using = "a[href*='route=checkout/cart']")
     private WebElement viewCartButton;
 
     @FindBy(how = How.XPATH, using = "//div[@class='container']/div[@class='alert alert-success']")
@@ -46,11 +47,66 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "//div[@class='row']/div//div/p[@class='price']")
     private List<WebElement> priceList;
 
+    @FindBy(how = How.XPATH, using = "//span[.='Currency']")
+    private WebElement currencyButton;
+
+    @FindBy(how = How.XPATH, using = "//*[@id='form-currency']/div/button/strong")
+    private WebElement currencySymbol;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='product-thumb']")
+    private List<WebElement> listOfProducts;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='alert alert-success']/a[contains(text(),'product comparison')]")
+    WebElement productComparisonLink;
+
+    public String readCurrencySymbol() {
+        return currencySymbol.getText();
+    }
+
+    public void setCurrency(String currency, WebDriver driver) {
+        driver.findElement(By.cssSelector("button[name='" + currency + "']")).click();
+    }
+
+    public void clickCurrencyButton() {
+        currencyButton.click();
+    }
+
     public WebElement getSuccessMessage() {
         return successMessage;
     }
 
-    public void clickViewCartBtn(){
+    public String getSuccessMessageText() {
+        return successMessage.getText();
+    }
+
+    public WebElement getProductComparisonLink() {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        // Get the Link element from the success message to access the comparison table
+        return wait.until(ExpectedConditions.visibilityOfElementLocated
+            (By.xpath("//div[@class='alert alert-success']/a[contains(text(),'product comparison')]")));
+    }
+
+    public List<WebElement> getListOfProducts() {
+        return listOfProducts;
+    }
+
+    public WebElement getCompareButton(List<WebElement> productList, int index) {
+        return productList.get(index).findElement(By.cssSelector("button[data-original-title='Compare this Product']"));
+    }
+
+    public WebElement getCompareButton(String product) {
+        return getProductThumb(product).findElement(By.cssSelector("button[data-original-title='Compare this Product']"));
+    }
+
+    public String getItemTitle(List<WebElement> productList, int index) {
+        return productList.get(index).findElement(By.tagName("h4")).getText();
+    }
+
+    public String getItemTitle(String product) {
+        return getProductThumb(product).findElement(By.tagName("h4")).getText();
+    }
+
+    public void clickViewCartBtn() {
         viewCartButton.click();
     }
 
@@ -90,28 +146,31 @@ public class HomePage {
         this.cartTotalButton = cartTotalButton;
     }
 
-    public void searchItem(String itemName){
+    public void searchItem(String itemName) {
         searchEdit.clear();
         searchEdit.sendKeys(itemName);
         searchButton.click();
     }
 
-    public void clickLinkByHref(String href, WebDriver driver) {
-        List<WebElement> anchors = driver.findElements(By.tagName("a"));
-        Iterator<WebElement> i = anchors.iterator();
-        String anchorAttribute;
-        while (i.hasNext()) {
-            WebElement anchor = i.next();
-            anchorAttribute = anchor.getAttribute("href");
-            if (anchorAttribute.contains(href)) {
-                anchor.click();
-                break;
-            }
-        }
+    public WebElement getProductCaption(String product) {
+        String xpath = "//div[@class='caption' and descendant::a[text()='" + product + "']]";
+        WebElement productCaption = driver.findElement(By.xpath(xpath));
+        return productCaption;
     }
 
-    public void clickViewCart(String href, WebDriver driver){
-        clickLinkByHref(href, driver);
+    public WebElement getProductThumb(String product) {
+        WebElement productThumb = driver.findElement(By.xpath("//div[@class='product-thumb' and descendant::a[text()='"
+            + product + "']]"));
+        return productThumb;
     }
 
+    public String getProductPrice(String product) {
+        String productCurrencySymbol = getProductCaption(product).findElement(By.cssSelector("p[class^='price']")).getText();
+        return productCurrencySymbol;
+    }
+
+    public String getProductCurrencySymbol(String product) {
+        String price = this.getProductPrice(product);
+        return price.replaceAll("[^£]", "");
+    }
 }

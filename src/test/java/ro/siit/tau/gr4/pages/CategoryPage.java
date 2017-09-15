@@ -49,5 +49,11 @@ public class CategoryPage {
         categoryName.click();
     }
 
+    public String getCategoryText(String category, WebDriver driver){
+        WebElement categoryName = driver.findElement(By.linkText(category));
+        return categoryName.getText();
+    }
+
+
 
 }
