@@ -49,19 +49,37 @@ public class WishListPage {
         return wishListTitle.getText();
     }
 
-    /*public boolean verifyIfProductIsPresent(String product){
-        List<WebElement> listOfItems = wishListTable.findElements(By.cssSelector("a[href='" + product + "']"));
-        return listOfItems.contains(product);
+    public boolean verifyProductIsAbsent(String product) {
+        List<WebElement> listOfItems = driver.findElements(By.partialLinkText("" + product + ""));
+        System.out.println("List of items: " + listOfItems);
+        return listOfItems.isEmpty();
+    }
+
+    public boolean verifyProductIsDisplayed(String product, WebDriver driver) throws Exception {
+        try {
+            WebElement productName = driver.findElement(By.partialLinkText(product));
+            return productName.isDisplayed();
+        } catch (NoSuchElementException e) {
+            System.out.println("Element not found");
+            return false;
+
+        }
+    }
+
+    /*public int verifyProductIsAbsent(String product){
+        List<WebElement> listOfItems = driver.findElements(By.partialLinkText("" + product + ""));
+        System.out.println(listOfItems);
+        return listOfItems.size();
     }*/
 
-    public boolean verifyElementAbsent(String product) throws Exception {
+    /*public boolean verifyElemenIstAbsent(String product) throws Exception {
         try {
-            wishListTable.findElement(By.cssSelector("a[href='" + product + "']"));
+            wishListTable.findElement(By.partialLinkText(product));
             return false;
         } catch (NoSuchElementException e) {
             return true;
         }
-    }
+    }*/
 
 
 }

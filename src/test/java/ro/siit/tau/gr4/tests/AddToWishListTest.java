@@ -72,18 +72,19 @@ public class AddToWishListTest extends BaseTest{
         //add product to cart
         wishListPage.clickAddToCartBtn("Nikon D300");
 
-        try {
-            Assert.assertEquals(wishListPage.verifyElementAbsent("Samsung Galaxy Tab 10.1"),
+            Assert.assertEquals(wishListPage.verifyProductIsAbsent("Samsung Galaxy Tab 10.1"),
                 true,
                 "check if product was removed");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         //go to cart & verify product was added
         homePage.clickViewCartBtn();
-        Assert.assertEquals(categoryPage.verifyProductIsDisplayed("Nikon D300", driver),
-            true,
-            "check if product was added in cart");
+
+        try {
+            Assert.assertEquals(wishListPage.verifyProductIsDisplayed("Nikon D300", driver),
+                true,
+                "check if product was added in cart");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
