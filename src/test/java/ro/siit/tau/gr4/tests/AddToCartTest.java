@@ -20,6 +20,9 @@ public class AddToCartTest extends BaseTest {
         CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
         cartPage.setDriver(driver);
 
+
+
+
         //go to category
         categoryPage.clickCategory("Phones & PDAs", driver);
                     Assert.assertEquals(categoryPage.getCategoryTitle(),
