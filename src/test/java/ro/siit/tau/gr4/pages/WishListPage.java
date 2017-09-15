@@ -11,7 +11,6 @@ import java.util.List;
 public class WishListPage {
 
     WebDriver driver;
-
     public void setDriver(WebDriver driver){
         this.driver=driver;}
 
@@ -44,10 +43,7 @@ public class WishListPage {
     }
 
     public List<WebElement> verifyListedElement(String product){
-        List<WebElement> listOfItems = driver.findElements(By.cssSelector("a[href*='" + product + "']"));
+        List<WebElement> listOfItems = driver.findElements(By.cssSelector("a[href='" + product + "']"));
         return listOfItems;
     }
-
-
-
 }

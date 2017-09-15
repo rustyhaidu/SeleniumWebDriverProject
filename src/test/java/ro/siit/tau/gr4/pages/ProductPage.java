@@ -8,6 +8,10 @@ import org.openqa.selenium.support.How;
 
 public class ProductPage {
 
+    WebDriver driver;
+    public void setDriver(WebDriver driver){
+        this.driver=driver;}
+
     @FindBy(how = How.ID, using = "button-cart")
     private WebElement addToCartButton;
 
@@ -16,14 +20,6 @@ public class ProductPage {
 
     @FindBy(how = How.ID, using = "wishlist-total")
     private WebElement WishList;
-
-
-    @FindBy(how = How.XPATH, using = "//div[@class='col-sm-4' and descendant::h2")
-    private WebElement productPrice;
-
-    public String getProductPrice(){
-        return productPrice.getText();
-    }
 
     public void clickAddToWishListButton(){
         addToWishListButton.click();
@@ -37,20 +33,33 @@ public class ProductPage {
         addToCartButton.click();
     }
 
-    public void setAddToCartButton(WebElement addToCartButton) {
-        this.addToCartButton = addToCartButton;
-    }
-
-    /*public WebElement getProductName() {
-        return productName;
-    }*/
-
     public String getProductTitle(String product, WebDriver driver){
         WebElement productTitle = driver.findElement(By.tagName(product));
         return productTitle.getText();
     }
 
+    public WebElement getProductInfo(){
+        WebElement productInfo = driver.findElement(By.xpath("//div[@class='col-sm-4' and descendant::h2]"));
+        return productInfo;
+    }
 
+    public String getPrice(){
+        String price = getProductInfo().findElement(By.tagName("h2")).getText();
+        return price;
+    }
 
+    public String getExTaxPrice(){
+        String price = getProductInfo().findElement(By.xpath(".//ul[2]/li/following-sibling::li")).getText();
+        return price;
+    }
 
+    public String getCurrencySymbolFromPrice(){
+        String price = getProductInfo().findElement(By.tagName("h2")).getText();
+        return price.replaceAll("[^£]","");
+    }
+
+    public String getCurrencySymbolFromExTaxPrice(){
+        String price = getProductInfo().findElement(By.xpath(".//ul[2]/li/following-sibling::li")).getText();
+        return price.replaceAll("[^£]","");
+    }
 }

@@ -15,29 +15,31 @@ public class ChangeCurrencyTest extends BaseTest {
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
         CategoryPage categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
-        homePage.setDriver(driver);
 
+        homePage.setDriver(driver);
+        productPage.setDriver(driver);
+
+        //change currency
         homePage.clickCurrencyButton();
         homePage.setCurrency("GBP", driver);
+        Assert.assertEquals(homePage.readCurrencySymbol(),
+            "£",
+            "check currency symbol is correctly set in the currency dropdown button");
+        Assert.assertEquals(homePage.getTextFromCartTotalButton().contains("£"),
+            true,
+            "check currency symbol is displayed on the Cart Button");
+        Assert.assertEquals(homePage.getProductCurrencySymbol("MacBook"),
+            "££",
+            "check currency symbol is displayed twice: in price and in Ex.Tax Price");
 
-
-                Assert.assertEquals(homePage.readCurrencySymbol(),
-                    "£",
-                    "check currency symbol is correctly set in the Currency dropdown button");
-
-                Assert.assertEquals(homePage.getTextFromCartTotalButton().contains("£"),
-                    true,
-                    "currency Symbol is displayed on the Cart Button");
-
-                Assert.assertEquals(homePage.getProductCurrencySymbol("MacBook"),
-                    "££",
-                    "check currency Symbol is displayed twice in the price");
-
+        //go to the product page
         categoryPage.clickProduct("iPhone", driver);
-
-                Assert.assertEquals(productPage.getProductPrice(),
-                    "??",
-                    "chekkk");
+        Assert.assertEquals(productPage.getCurrencySymbolFromPrice(),
+            "£",
+            "check currency symbol is displayed in price");
+        Assert.assertEquals(productPage.getCurrencySymbolFromExTaxPrice(),
+            "£",
+            "check currency symbol is displayed in Ex.Tax Price");
 
     }
 
