@@ -53,6 +53,4 @@ public class CategoryPage {
         WebElement categoryName = driver.findElement(By.linkText(category));
         categoryName.click();
     }
-
-
 }

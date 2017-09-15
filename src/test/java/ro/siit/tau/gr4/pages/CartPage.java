@@ -9,11 +9,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CartPage {
-
-    WebDriver driver;
-    public void setDriver(WebDriver driver){
-        this.driver=driver;}
+public class CartPage extends BasePage{
 
     @FindBy(how = How.PARTIAL_LINK_TEXT, using = "Shopping Cart")
     private WebElement cartBreadcrumb;
@@ -51,13 +47,12 @@ public class CartPage {
 
     public WebElement getQuantityField(String product){
         WebElement cartRow = this.getCartRow(product);
-        return cartRow.findElement(By.xpath(".//input[@type='text' and contains(@name,'quantity')]"));
+        return cartRow.findElement(By.cssSelector("input[name^='quantity']"));
     }
 
     public String readQuantity(String product){
         WebElement quantityField = this.getQuantityField(product);
         return quantityField.getAttribute("value");
     }
-
 
 }

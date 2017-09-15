@@ -1,19 +1,14 @@
 package ro.siit.tau.gr4.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
-public class WishListPage {
-
-    WebDriver driver;
-    public void setDriver(WebDriver driver){
-        this.driver=driver;}
+public class WishListPage extends BasePage {
 
     @FindBy(how = How.TAG_NAME, using = "h2")
     private WebElement wishListTitle;
@@ -27,26 +22,32 @@ public class WishListPage {
     @FindBy(how = How.XPATH, using = "//table[@class='table table-bordered table-hover']")
     private WebElement wishListTable;
 
-    public String getSuccessMessage(){
+    public String getSuccessMessage() {
         return sucessMessage.getText();
     }
 
-    public WebElement getWishlistRow(String product){
+    public WebElement getWishlistRow(String product) {
         return driver.findElement(By.xpath("//*[@id='content']/div[1]/table/tbody/tr[descendant::a[text()='"
             + product + "']]"));
     }
 
-    public void clickRemoveBtn(String product){
+    public void clickRemoveBtn(String product) {
         WebElement row = this.getWishlistRow(product);
         row.findElement(By.xpath(".//a[@data-original-title='Remove']")).click();
     }
-    public void clickAddToCartBtn(String product){
+
+    public void clickAddToCartBtn(String product) {
         WebElement row = this.getWishlistRow(product);
         row.findElement(By.xpath(".//button[@type='button' and @data-original-title='Add to Cart']")).click();
     }
 
-    public String getWishListTitle(){
+    public String getWishListTitle() {
         return wishListTitle.getText();
+    }
+
+    public List<WebElement> verifyListedElement(String product) {
+        List<WebElement> listOfItems = driver.findElements(By.cssSelector("a[href='" + product + "']"));
+        return listOfItems;
     }
 
     /*public boolean verifyIfProductIsPresent(String product){

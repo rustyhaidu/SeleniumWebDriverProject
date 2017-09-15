@@ -9,15 +9,10 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
+import java.util.Iterator;
 import java.util.List;
 
-public class HomePage {
-
-    WebDriver driver;
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
-    }
+public class HomePage extends BasePage{
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"cart\"]")
     private WebElement cartTotalButton;
@@ -64,15 +59,15 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "//div[@class='alert alert-success']/a[contains(text(),'product comparison')]")
     WebElement productComparisonLink;
 
-    public String readCurrencySymbol(){
+    public String readCurrencySymbol() {
         return currencySymbol.getText();
     }
 
-    public void setCurrency(String currency, WebDriver driver){
+    public void setCurrency(String currency, WebDriver driver) {
         driver.findElement(By.cssSelector("button[name='" + currency + "']")).click();
     }
 
-    public void clickCurrencyButton(){
+    public void clickCurrencyButton() {
         currencyButton.click();
     }
 
@@ -91,56 +86,23 @@ public class HomePage {
             (By.xpath("//div[@class='alert alert-success']/a[contains(text(),'product comparison')]")));
     }
 
-    public WebElement getTableData(int row, int column) {
-        return new WebDriverWait(driver, 3)
-            .until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//*[@id='content']/table/tbody[1]/tr[" + row + "]/td[" + column + "]")));
-    }
-
-    public int getProductComparisonTableRowCount(){
-        int rowCount = driver.findElements(By.xpath("//*[@id='content']/table/tbody[1]/tr")).size();
-        return rowCount;
-    }
-
-    public int getProductComparisonTableColumnCount(){
-        int columnCount = driver.findElements(By.xpath("//*[@id='content']/table/tbody[1]/tr[1]/td")).size();
-        return columnCount;
-    }
-
-    public WebElement getPrecedingTable(String header){
-        return driver.findElement(By.xpath("//table[@class='table table-bordered' and preceding-sibling::h1[text()='"+header+"']]"));
-    }
-
-    public WebElement getPrecedingTableData(String header, int row, int column){
-        return getPrecedingTable(header).findElement(By.xpath(".//tr[" + row + "]/td[" + column + "]"));
-
-    }
-
-    public int getPrecedingTableRowCount(String header){
-        return getPrecedingTable(header).findElements(By.xpath(".//tbody[1]/tr")).size();
-    }
-
-    public int getPrecedingTableColumnCount(String header, int row){
-        return getPrecedingTable(header).findElements(By.xpath(".//tbody[1]/tr["+row+"]/td")).size();
-    }
-
     public List<WebElement> getListOfProducts() {
         return listOfProducts;
     }
 
-    public WebElement getCompareButton(List<WebElement> productList, int index){
+    public WebElement getCompareButton(List<WebElement> productList, int index) {
         return productList.get(index).findElement(By.cssSelector("button[data-original-title='Compare this Product']"));
     }
 
-    public WebElement getCompareButton(String product){
+    public WebElement getCompareButton(String product) {
         return getProductThumb(product).findElement(By.cssSelector("button[data-original-title='Compare this Product']"));
     }
 
-    public String getItemTitle(List<WebElement> productList, int index){
+    public String getItemTitle(List<WebElement> productList, int index) {
         return productList.get(index).findElement(By.tagName("h4")).getText();
     }
 
-    public String getItemTitle(String product){
+    public String getItemTitle(String product) {
         return getProductThumb(product).findElement(By.tagName("h4")).getText();
     }
 
@@ -190,25 +152,25 @@ public class HomePage {
         searchButton.click();
     }
 
-    public WebElement getProductCaption(String product){
+    public WebElement getProductCaption(String product) {
         String xpath = "//div[@class='caption' and descendant::a[text()='" + product + "']]";
         WebElement productCaption = driver.findElement(By.xpath(xpath));
         return productCaption;
     }
 
-    public WebElement getProductThumb(String product){
+    public WebElement getProductThumb(String product) {
         WebElement productThumb = driver.findElement(By.xpath("//div[@class='product-thumb' and descendant::a[text()='"
-            +product+"']]"));
+            + product + "']]"));
         return productThumb;
     }
 
-    public String getProductPrice(String product){
+    public String getProductPrice(String product) {
         String productCurrencySymbol = getProductCaption(product).findElement(By.cssSelector("p[class^='price']")).getText();
         return productCurrencySymbol;
     }
 
-    public String getProductCurrencySymbol(String product){
+    public String getProductCurrencySymbol(String product) {
         String price = this.getProductPrice(product);
-        return price.replaceAll("[^£]","");
+        return price.replaceAll("[^£]", "");
     }
 }

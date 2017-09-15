@@ -5,8 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import ro.siit.tau.gr4.pages.BasePage;
+import ro.siit.tau.gr4.pages.HomePage;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     public WebDriver driver;
+    public BasePage basePage;
 
     @BeforeMethod
     public void driver() {
@@ -23,6 +27,8 @@ public class BaseTest {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("start-maximized");
         driver = new ChromeDriver(chromeOptions);
+        basePage = PageFactory.initElements(driver, BasePage.class);
+        basePage.setDriver(driver);
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://shop-tausandbox.rhcloud.com");
