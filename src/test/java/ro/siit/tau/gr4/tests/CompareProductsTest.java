@@ -87,7 +87,7 @@ public class CompareProductsTest extends BaseTest {
         String productName;
         String expectedItemTitle;
         for (int i = 2; i <= columnCount; i++) {
-            WebElement tableData = homePage.getTableData(1, i);
+            WebElement tableData = homePage.getPrecedingTableData("Product Comparison",1, i);
             productName = tableData.getText();
             expectedItemTitle = itemTitles.get(i - minusArrayIndex);
             System.out.println("Expected item Title: " + expectedItemTitle);

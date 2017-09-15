@@ -112,7 +112,7 @@ public class HomePage {
     }
 
     public WebElement getPrecedingTableData(String header, int row, int column){
-        return getPrecedingTable(header).findElement(By.xpath(".//[" + row + "]/td[" + column + "]"));
+        return getPrecedingTable(header).findElement(By.xpath(".//tr[" + row + "]/td[" + column + "]"));
 
     }
 
