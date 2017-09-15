@@ -23,7 +23,7 @@ import java.util.Iterator;
  */
 public class RegistrationTest extends BaseTest {
 
-   /* @DataProvider(name = "JSONDataProviderRegistration")
+    @DataProvider(name = "JSONDataProviderRegistration")
     public Iterator<Object[]> jsonDataProviderCollection() {
         Collection<Object[]> dp = new ArrayList<>();
         try {
@@ -37,7 +37,7 @@ public class RegistrationTest extends BaseTest {
             e.printStackTrace();
         }
         return dp.iterator();
-    }*/
+    }
 
     @Test(dataProvider = "JSONDataProviderRegistration")
     public void RegistrationTest1(RegistrationModel registrationModel) {
@@ -74,9 +74,9 @@ public class RegistrationTest extends BaseTest {
             Assert.assertEquals(registrationPage.getStateError(),
                 registrationModel.getStateError(),
                 "Verifying City error error");
-           /* Assert.assertEquals(registrationPage.getPasswordConfirmError(),
+            Assert.assertEquals(registrationPage.getPasswordConfirmError(),
                 registrationModel.getPasswordConfirmError(),
-                "Verifying City error error");*/
+                "Verifying City error error");
 
 
         } else if(registrationModel.expectSuccessfulRegistration() == true){
