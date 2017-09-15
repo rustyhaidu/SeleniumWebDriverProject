@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ro.siit.tau.gr4.pages.HomePage;
+
 import java.util.*;
 
 public class CompareProductsTest extends BaseTest {
@@ -17,7 +18,7 @@ public class CompareProductsTest extends BaseTest {
     public Object[][] jsonDataProviderCollection() {
 
         return new Object[][]{
-            {"Canon EOS 5D","HP LP3065","HTC Touch HD","iMac","iPhone"}
+            {"Canon EOS 5D", "HP LP3065", "HTC Touch HD", "iMac", "iPhone"}
         };
     }
 
@@ -32,55 +33,47 @@ public class CompareProductsTest extends BaseTest {
 
         // Make a search by entering the space keyboard character
         homePage.searchItem(" ");
-        String successMessage;
-        String productName;
-        String expectedItemTitle;
 
         // Get the list of all products
         List<String> itemTitles = new LinkedList<>();
 
-        for (int i = 0; i < arrayOfItems.length-1; i++) {
-
-            WebElement addToCompareButton = homePage.getCompareButton(arrayOfItems[i]);
-            String itemTitle = homePage.getItemTitle(arrayOfItems[i]);
-            itemTitles.add(itemTitle);
-            System.out.println("Element to be added: " + itemTitle);
-            addToCompareButton.click();
-            Thread.sleep(1000);
-
+        for (int i = 0; i < arrayOfItems.length - 1; i++) {
+            String itemTitle = addProductToCompareTable(arrayOfItems[i], itemTitles);
             //Verify the Message for adding an item to the compare list'
-            successMessage = homePage.getSuccessMessageText().replace("×", "").trim();
-            Assert.assertEquals(successMessage,
-                new StringBuilder("Success: You have added")
-                    .append(" ")
-                    .append(itemTitle)
-                    .append(" ")
-                    .append("to your product comparison!").toString());
+            checkProductAddedSuccessMessage(itemTitle);
         }
 
         System.out.println(homePage.getProductComparisonLink().getText());
         homePage.getProductComparisonLink().click();
-        int columnCount = homePage.getPrecedingTableColumnCount("Product Comparison",1);
+        int columnCount = homePage.getPrecedingTableColumnCount("Product Comparison", 1);
 
-        for (int i = 2; i <= columnCount; i++) {
-            WebElement tableData = homePage.getTableData(1, i);
-            productName = tableData.getText();
-            expectedItemTitle = itemTitles.get(i - 2);
-            System.out.println("Actual Product added: " + productName);
-            System.out.println("Expected item Title: " + expectedItemTitle);
-            Assert.assertEquals(expectedItemTitle, productName, "Checking that the correct item was added");
-        }
+        System.out.println("\nGet the table data from the first position, column 2, array index = 0 ");
+        checkTableContent(itemTitles, columnCount, 2);
 
         // Perform the search again to add another item to the comparison
         homePage.searchItem(" ");
 
-        WebElement addToCompareButton = homePage.getCompareButton(arrayOfItems[4]);
-        String itemTitle = homePage.getItemTitle(arrayOfItems[4]);
+        //Verify the Message for adding an item to the compare list
+        String itemTitle = addProductToCompareTable(arrayOfItems[4], itemTitles);
+        checkProductAddedSuccessMessage(itemTitle);
+        homePage.getProductComparisonLink().click();
+
+        System.out.println("\nGet the table data and their text again to check changes, without the first item, it was replaced");
+        checkTableContent(itemTitles, columnCount, 1);
+    }
+
+    private String addProductToCompareTable(String arrayOfItem, List<String> itemTitles) throws InterruptedException {
+        WebElement addToCompareButton = homePage.getCompareButton(arrayOfItem);
+        String itemTitle = homePage.getItemTitle(arrayOfItem);
         itemTitles.add(itemTitle);
+        System.out.println("Element to be added: " + itemTitle);
         addToCompareButton.click();
         Thread.sleep(1000);
+        return itemTitle;
+    }
 
-        //Verify the Message for adding an item to the compare list'
+    private void checkProductAddedSuccessMessage(String itemTitle) {
+        String successMessage;
         successMessage = homePage.getSuccessMessageText().replace("×", "").trim();
         Assert.assertEquals(successMessage,
             new StringBuilder("Success: You have added")
@@ -88,19 +81,18 @@ public class CompareProductsTest extends BaseTest {
                 .append(itemTitle)
                 .append(" ")
                 .append("to your product comparison!").toString());
+    }
 
-
-        homePage.getProductComparisonLink().click();
-
-        // Get the table data and their text again to check changes
-        for (int i = 2; i < columnCount; i++) {
-            WebElement tableData = homePage.getTableData(1, i);
+    private void checkTableContent(List<String> itemTitles, int columnCount, int minusArrayIndex) {
+        String productName;
+        String expectedItemTitle;
+        for (int i = 2; i <= columnCount; i++) {
+            WebElement tableData = homePage.getPrecedingTableData("Product Comparison",1, i);
             productName = tableData.getText();
-            expectedItemTitle = itemTitles.get(i - 1);
-            System.out.println("Actual Product added: " + productName);
+            expectedItemTitle = itemTitles.get(i - minusArrayIndex);
             System.out.println("Expected item Title: " + expectedItemTitle);
+            System.out.println("Actual Product added: " + productName);
             Assert.assertEquals(expectedItemTitle, productName, "Checking that the correct item was added");
         }
-
     }
 }
