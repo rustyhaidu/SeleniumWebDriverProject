@@ -44,24 +44,21 @@ public class BasePage {
     }
 
     public int getPrecedingH1TableColumnCount(String header, int row) {
-        return getPrecedingH1Table(header).findElements(By.xpath(".//tbody[1]/tr[" + row + "]/td")).size();
+        return getPrecedingH1Table(header).findElements(By.xpath(".//tbody/tr[" + row + "]/td")).size();
     }
 
     //***********************************************************WishList**********H2//
 
     public WebElement getWishListTable() {
-        return driver.findElement(By.xpath("//div[@class='table-responsive']/table[@class='table table-bordered table-hover']"));
-        //*[@id="content"]/div[1]/table
+        return driver.findElement(By.xpath("//table[@class='table table-bordered table-hover']"));
     }
 
-    public WebElement getWishListTableData(String header, int row, int column) {
-        String xpath = ".//tbody/tr[" + row + "]/td[" + column + "]";
-        return getWishListTable().findElement(By.xpath(xpath));
-
+    public WebElement getWishListTableCell(String header, int row, int column) {
+        return getWishListTable().findElement(By.xpath(".//tbody/tr[" + row + "]/td[" + column + "]"));
     }
 
     public int getWishListTableRowCount() {
-        return getWishListTable().findElements(By.xpath(".//tbody[1]/tr")).size();
+        return getWishListTable().findElements(By.xpath(".//tbody/tr")).size();
     }
 
     public int getWishListTableColumnCount(String header, int row) {

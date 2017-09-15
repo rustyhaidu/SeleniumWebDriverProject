@@ -6,19 +6,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 public class WishListPage extends BasePage {
+
+    BasePage basePage = PageFactory.initElements(driver, BasePage.class);
 
     @FindBy(how = How.TAG_NAME, using = "h2")
     private WebElement wishListTitle;
 
     @FindBy(how = How.XPATH, using = "//div[@class='container']/div[@class='alert alert-success']")
     private WebElement sucessMessage;
-
-    /*@FindBy(how = How.XPATH, using = "/*//*[@id='content']/div[1]/table/tbody")
-    private WebElement wishListTable;*/
 
     @FindBy(how = How.XPATH, using = "//table[@class='table table-bordered table-hover']")
     private WebElement wishListTable;
@@ -32,12 +32,12 @@ public class WishListPage extends BasePage {
             + product + "']]"));
     }
 
-    public void clickRemoveBtn(String product) {
+    public void removeProductFromWishList(String product) {
         WebElement row = this.getWishlistRow(product);
         row.findElement(By.xpath(".//a[@data-original-title='Remove']")).click();
     }
 
-    public void clickAddToCartBtn(String product) {
+    public void addProductToCart(String product) {
         WebElement row = this.getWishlistRow(product);
         row.findElement(By.xpath(".//button[@type='button' and @data-original-title='Add to Cart']")).click();
     }
@@ -56,7 +56,7 @@ public class WishListPage extends BasePage {
         try {
             WebElement productName = driver.findElement(By.partialLinkText(product));
             return productName.isDisplayed();
-        } catch (NoSuchElementException e) {
+        } catch (java.util.NoSuchElementException e) {
             System.out.println("Element not found");
             return false;
 
@@ -76,7 +76,30 @@ public class WishListPage extends BasePage {
         } catch (NoSuchElementException e) {
             return true;
         }
+    }*/
+
+    public boolean checkProductWasRemoved(String product){
+        int tableRowCount = basePage.getWishListTableRowCount();
+
+        for (int i = 1; i <= tableRowCount; i++) {
+            String productInPage = basePage.getWishListTableCell("My Wish List", i, 2).getText();
+            if (productInPage.equals(product)){
+                System.out.println("Found: " + productInPage);
+                return false;
+            }
+        }
+        return true;
     }
 
+    public boolean checkProductIsPresent(String product){
+        int tableRowCount = basePage.getShoppingCartTableRowCount();
+        for (int i = 1; i <= tableRowCount; i++) {
+            String productInPage = basePage.getShoppingCartTableData(i, 2).getText();
+            if (productInPage.equals(product)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
