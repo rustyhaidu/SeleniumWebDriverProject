@@ -5,8 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ro.siit.tau.gr4.pages.*;
 
-import java.util.NoSuchElementException;
-
 public class AddToWishListTest extends BaseTest {
 
     @Test
@@ -76,7 +74,7 @@ public class AddToWishListTest extends BaseTest {
         //add product to cart
         wishListPage.addProductToCart("Nikon D300");
 
-        Assert.assertEquals(wishListPage.checkProductWasRemoved("iPhone"),
+        Assert.assertEquals(wishListPage.checkProductWasRemoved("Samsung Galaxy Tab 10.1"),
             true,
             "check if product was removed");
 
