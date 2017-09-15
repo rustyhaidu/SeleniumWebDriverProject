@@ -6,11 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class ProductPage {
-
-    WebDriver driver;
-    public void setDriver(WebDriver driver){
-        this.driver=driver;}
+public class ProductPage extends BasePage{
 
     @FindBy(how = How.ID, using = "button-cart")
     private WebElement addToCartButton;
@@ -32,6 +28,14 @@ public class ProductPage {
     public void clickAddToCartButton() {
         addToCartButton.click();
     }
+
+    public void setAddToCartButton(WebElement addToCartButton) {
+        this.addToCartButton = addToCartButton;
+    }
+
+    /*public WebElement getProductName() {
+        return productName;
+    }*/
 
     public String getProductTitle(String product, WebDriver driver){
         WebElement productTitle = driver.findElement(By.tagName(product));

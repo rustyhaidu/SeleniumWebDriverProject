@@ -9,11 +9,7 @@ import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
 
-public class WishListPage {
-
-    WebDriver driver;
-    public void setDriver(WebDriver driver){
-        this.driver=driver;}
+public class WishListPage extends BasePage {
 
     @FindBy(how = How.TAG_NAME, using = "h2")
     private WebElement wishListTitle;
@@ -27,25 +23,26 @@ public class WishListPage {
     @FindBy(how = How.XPATH, using = "//table[@class='table table-bordered table-hover']")
     private WebElement wishListTable;
 
-    public String getSuccessMessage(){
+    public String getSuccessMessage() {
         return sucessMessage.getText();
     }
 
-    public WebElement getWishlistRow(String product){
+    public WebElement getWishlistRow(String product) {
         return driver.findElement(By.xpath("//*[@id='content']/div[1]/table/tbody/tr[descendant::a[text()='"
             + product + "']]"));
     }
 
-    public void clickRemoveBtn(String product){
+    public void clickRemoveBtn(String product) {
         WebElement row = this.getWishlistRow(product);
         row.findElement(By.xpath(".//a[@data-original-title='Remove']")).click();
     }
-    public void clickAddToCartBtn(String product){
+
+    public void clickAddToCartBtn(String product) {
         WebElement row = this.getWishlistRow(product);
         row.findElement(By.xpath(".//button[@type='button' and @data-original-title='Add to Cart']")).click();
     }
 
-    public String getWishListTitle(){
+    public String getWishListTitle() {
         return wishListTitle.getText();
     }
 
@@ -79,7 +76,7 @@ public class WishListPage {
         } catch (NoSuchElementException e) {
             return true;
         }
-    }*/
+    }
 
 
 }

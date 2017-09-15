@@ -25,7 +25,6 @@ public class CompareProductsTest extends BaseTest {
     @BeforeMethod
     public void setCompareTest() {
         homePage = PageFactory.initElements(driver, HomePage.class);
-        homePage.setDriver(driver);
     }
 
     @Test(dataProvider = "itemToAddToCompareList")
@@ -45,7 +44,7 @@ public class CompareProductsTest extends BaseTest {
 
         System.out.println(homePage.getProductComparisonLink().getText());
         homePage.getProductComparisonLink().click();
-        int columnCount = homePage.getPrecedingTableColumnCount("Product Comparison", 1);
+        int columnCount = basePage.getPrecedingH1TableColumnCount("Product Comparison", 1);
 
         System.out.println("\nGet the table data from the first position, column 2, array index = 0 ");
         checkTableContent(itemTitles, columnCount, 2);
@@ -87,7 +86,7 @@ public class CompareProductsTest extends BaseTest {
         String productName;
         String expectedItemTitle;
         for (int i = 2; i <= columnCount; i++) {
-            WebElement tableData = homePage.getPrecedingTableData("Product Comparison",1, i);
+            WebElement tableData = basePage.getPrecedingH1TableData("Product Comparison",1, i);
             productName = tableData.getText();
             expectedItemTitle = itemTitles.get(i - minusArrayIndex);
             System.out.println("Expected item Title: " + expectedItemTitle);

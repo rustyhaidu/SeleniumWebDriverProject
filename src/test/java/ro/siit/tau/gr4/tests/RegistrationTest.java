@@ -17,22 +17,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by andrei on 9/4/2017.
  */
 public class RegistrationTest extends BaseTest {
 
-    File[] getListOfFiles(String directoryName) {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File directory = new File(classLoader.getResource(directoryName).getFile());
-        File[] files = directory.listFiles();
-        System.out.println("Found " + files.length + " files in " + directoryName + " folder");
-        return files;
-    }
-
-    @DataProvider(name = "JSONDataProviderRegistration")
+   /* @DataProvider(name = "JSONDataProviderRegistration")
     public Iterator<Object[]> jsonDataProviderCollection() {
         Collection<Object[]> dp = new ArrayList<>();
         try {
@@ -46,51 +37,46 @@ public class RegistrationTest extends BaseTest {
             e.printStackTrace();
         }
         return dp.iterator();
-    }
+    }*/
 
     @Test(dataProvider = "JSONDataProviderRegistration")
-    public void RegistrationTest1(RegistrationModel registrationModel) throws InterruptedException {
+    public void RegistrationTest1(RegistrationModel registrationModel) {
 
         RegistrationPage registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         WelcomePage welcomePage = PageFactory.initElements(driver, WelcomePage.class);
         registrationPage.click_on_register();
-        registrationPage.setCountryRegion(registrationModel.getCountry1(), registrationModel.getRegion());
         registrationPage.register(registrationModel);
-
-//        RegistrationPage.selectOption(registrationModel.getOptionName);
-
-
         if (registrationModel.expectSuccessfulRegistration() == false) {
-            Assert.assertEquals(registrationPage.getFirstNameError().getText(),
+            Assert.assertEquals(registrationPage.getFirstNameError(),
                 registrationModel.getFirstNameError(),
                 "Verifying first name error");
 
-            Assert.assertEquals(registrationPage.getLastNameError().getText(),
+            Assert.assertEquals(registrationPage.getLastNameError(),
                 registrationModel.getLastNameError(),
                 "Verifying last name error");
 
-            Assert.assertEquals(registrationPage.getEmailError().getText(),
+            Assert.assertEquals(registrationPage.getEmailError(),
                 registrationModel.getEmailError(),
                 "Verifying Email error");
 
-            Assert.assertEquals(registrationPage.getTelephoneError().getText(),
+            Assert.assertEquals(registrationPage.getTelephoneError(),
                 registrationModel.getTelephoneError(),
                 "Verifying telephone error");
 
-            Assert.assertEquals(registrationPage.getAddress1Error().getText(),
+            Assert.assertEquals(registrationPage.getAddress1Error(),
                 registrationModel.getAddress1Error(),
                 "Verifying address1 error");
 
-            Assert.assertEquals(registrationPage.getCityError().getText(),
+            Assert.assertEquals(registrationPage.getCityError(),
                 registrationModel.getCityError(),
                 "Verifying City error error");
 
-            Assert.assertEquals(registrationPage.getStateError().getText(),
+            Assert.assertEquals(registrationPage.getStateError(),
                 registrationModel.getStateError(),
                 "Verifying City error error");
-            Assert.assertEquals(registrationPage.getPasswordError().getText(),
-                registrationModel.getPasswordError(),
-                "Verifying Password error error");
+           /* Assert.assertEquals(registrationPage.getPasswordConfirmError(),
+                registrationModel.getPasswordConfirmError(),
+                "Verifying City error error");*/
 
 
         } else if(registrationModel.expectSuccessfulRegistration() == true){

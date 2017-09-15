@@ -13,7 +13,9 @@ public class AddToWishListTest extends BaseTest{
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
         CategoryPage categoryPage = PageFactory.initElements(driver, CategoryPage.class);
+        CartPage cartPage = PageFactory.initElements(driver, CartPage.class);
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+        LoginTest loginTest = PageFactory.initElements(driver, LoginTest.class);
         WishListPage wishListPage = PageFactory.initElements(driver, WishListPage.class);
 
         wishListPage.setDriver(driver);
@@ -71,20 +73,35 @@ public class AddToWishListTest extends BaseTest{
 
         //add product to cart
         wishListPage.clickAddToCartBtn("Nikon D300");
-
-            Assert.assertEquals(wishListPage.verifyProductIsAbsent("Samsung Galaxy Tab 10.1"),
-                true,
-                "check if product was removed");
+        int rowCount = basePage.getWishListTableRowCount();
+        boolean found = false;
+        String value = "";
+        for (int i = 1; i <= rowCount; i++) {
+            value = basePage.getWishListTableData("My Wish List", i, 2)
+                .getText();
+            if (value.equals("Samsung Galaxy Tab 10.1")){
+                found = true;
+            }
+        }
+        Assert.assertEquals(found,
+            false,
+            "check if product was removed");
 
         //go to cart & verify product was added
         homePage.clickViewCartBtn();
 
-        try {
-            Assert.assertEquals(wishListPage.verifyProductIsDisplayed("Nikon D300", driver),
-                true,
-                "check if product was added in cart");
-        } catch (Exception e) {
-            e.printStackTrace();
+        rowCount = basePage.getShoppingCartTableRowCount();
+        found = false;
+
+        for (int i = 1; i <= rowCount; i++) {
+            value = basePage.getShoppingCartTableData(i, 2)
+                .getText();
+            if (value.equals("Nikon D300")){
+                found = true;
+            }
         }
+        Assert.assertEquals(found,
+            true,
+            "check if product was added in cart");
     }
 }
