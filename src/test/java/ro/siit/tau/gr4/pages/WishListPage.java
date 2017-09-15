@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
 
@@ -19,6 +20,12 @@ public class WishListPage {
 
     @FindBy(how = How.XPATH, using = "//div[@class='container']/div[@class='alert alert-success']")
     private WebElement sucessMessage;
+
+    /*@FindBy(how = How.XPATH, using = "/*//*[@id='content']/div[1]/table/tbody")
+    private WebElement wishListTable;*/
+
+    @FindBy(how = How.XPATH, using = "//table[@class='table table-bordered table-hover']")
+    private WebElement wishListTable;
 
     public String getSuccessMessage(){
         return sucessMessage.getText();
@@ -42,8 +49,19 @@ public class WishListPage {
         return wishListTitle.getText();
     }
 
-    public List<WebElement> verifyListedElement(String product){
-        List<WebElement> listOfItems = driver.findElements(By.cssSelector("a[href='" + product + "']"));
-        return listOfItems;
+    /*public boolean verifyIfProductIsPresent(String product){
+        List<WebElement> listOfItems = wishListTable.findElements(By.cssSelector("a[href='" + product + "']"));
+        return listOfItems.contains(product);
+    }*/
+
+    public boolean verifyElementAbsent(String product) throws Exception {
+        try {
+            wishListTable.findElement(By.cssSelector("a[href='" + product + "']"));
+            return false;
+        } catch (NoSuchElementException e) {
+            return true;
+        }
     }
+
+
 }
