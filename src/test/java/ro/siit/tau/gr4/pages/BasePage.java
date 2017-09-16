@@ -35,7 +35,7 @@ public class BasePage {
     }
 
     public WebElement getPrecedingH1TableData(String header, int row, int column) {
-        return getPrecedingH1Table(header).findElement(By.xpath(".//tr[" + row + "]/td[" + column + "]"));
+        return getPrecedingH1Table(header).findElement(By.xpath(".//tbody[1]/tr[" + row + "]/td[" + column + "]"));
 
     }
 
@@ -44,7 +44,7 @@ public class BasePage {
     }
 
     public int getPrecedingH1TableColumnCount(String header, int row) {
-        return getPrecedingH1Table(header).findElements(By.xpath(".//tbody/tr[" + row + "]/td")).size();
+        return getPrecedingH1Table(header).findElements(By.xpath(".//tbody[1]/tr[" + row + "]/td")).size();
     }
 
     //***********************************************************WishList**********H2//
@@ -54,7 +54,7 @@ public class BasePage {
     }
 
     public WebElement getWishListTableCell(String header, int row, int column) {
-        return getWishListTable().findElement(By.xpath(".//tbody/tr[" + row + "]/td[" + column + "]"));
+        return getWishListTable().findElement(By.xpath(".//tbody[1]/tr[" + row + "]/td[" + column + "]"));
     }
 
     public int getWishListTableRowCount() {

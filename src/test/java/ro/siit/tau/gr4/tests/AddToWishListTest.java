@@ -66,9 +66,8 @@ public class AddToWishListTest extends BaseTest {
 
         //remove product from wishList & verify was removed
         wishListPage.removeProductFromWishList("Samsung Galaxy Tab 10.1");
-        Assert.assertEquals(wishListPage.getSuccessMessage(),
-            "Success: You have modified your wish list!\n" +
-                "×",
+        Assert.assertEquals(wishListPage.getSuccessMessage().replaceAll("\n.*", "").trim(),
+            "Success: You have modified your wish list!",
             "verify success message");
 
         //add product to cart

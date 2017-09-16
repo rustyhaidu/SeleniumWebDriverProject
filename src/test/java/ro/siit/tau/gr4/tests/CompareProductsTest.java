@@ -73,13 +73,16 @@ public class CompareProductsTest extends BaseTest {
 
     private void checkProductAddedSuccessMessage(String itemTitle) {
         String successMessage;
-        successMessage = homePage.getSuccessMessageText().replace("×", "").trim();
-        Assert.assertEquals(successMessage,
+        successMessage = homePage.getSuccessMessageText().replaceAll("\n.*", "").trim();
+        //successMessage = successMessage.replace("╫", "").trim();
+        System.out.println(successMessage);
+        Assert.assertEquals(
             new StringBuilder("Success: You have added")
                 .append(" ")
                 .append(itemTitle)
                 .append(" ")
-                .append("to your product comparison!").toString());
+                .append("to your product comparison!").toString(),
+            successMessage);
     }
 
     private void checkTableContent(List<String> itemTitles, int columnCount, int minusArrayIndex) {
