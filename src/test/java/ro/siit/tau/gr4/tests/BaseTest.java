@@ -12,6 +12,10 @@ import ro.siit.tau.gr4.pages.BasePage;
 import ro.siit.tau.gr4.pages.HomePage;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,9 +25,27 @@ public class BaseTest {
     public WebDriver driver;
     public BasePage basePage;
 
-    File[] getListOfFiles(String directoryName) {
+    /*File[] getListOfFiles(String directoryName) {
         ClassLoader classLoader = getClass().getClassLoader();
         File directory = new File(classLoader.getResource(directoryName).getFile());
+        File[] files = directory.listFiles();
+        System.out.println("Found " + files.length + " files in " + directoryName + " folder");
+        return files;
+    }*/
+
+    File[] getListOfFiles(String directoryName) throws URISyntaxException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL path = classLoader.getResource(directoryName);
+        String configPath = null;
+
+        try {
+            configPath = URLDecoder.decode(path.getFile(), "UTF-8");
+            System.out.println(configPath);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        File directory = new File(configPath);
+
         File[] files = directory.listFiles();
         System.out.println("Found " + files.length + " files in " + directoryName + " folder");
         return files;

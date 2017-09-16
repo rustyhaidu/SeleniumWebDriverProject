@@ -14,6 +14,10 @@ import ro.siit.tau.gr4.pages.WelcomePage;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -24,16 +28,26 @@ import java.util.concurrent.TimeUnit;
  */
 public class RegistrationTest extends BaseTest {
 
-    File[] getListOfFiles(String directoryName) {
+    File[] getListOfFiles(String directoryName) throws URISyntaxException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File directory = new File(classLoader.getResource(directoryName).getFile());
+        URL path = classLoader.getResource(directoryName);
+        String configPath = null;
+
+        try {
+            configPath = URLDecoder.decode(path.getFile(), "UTF-8");
+            System.out.println(configPath);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        File directory = new File(configPath);
+
         File[] files = directory.listFiles();
         System.out.println("Found " + files.length + " files in " + directoryName + " folder");
         return files;
     }
 
     @DataProvider(name = "JSONDataProviderRegistration")
-    public Iterator<Object[]> jsonDataProviderCollection() {
+    public Iterator<Object[]> jsonDataProviderCollection() throws URISyntaxException {
         Collection<Object[]> dp = new ArrayList<>();
         try {
             ObjectMapper mapper = new ObjectMapper();
