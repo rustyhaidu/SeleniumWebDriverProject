@@ -61,42 +61,46 @@ public class RegistrationTest extends BaseTest {
 
 
         if (registrationModel.expectSuccessfulRegistration() == false) {
-            Assert.assertEquals(registrationPage.getFirstNameError().getText(),
+            Assert.assertEquals(registrationPage.getFirstNameError(),
                 registrationModel.getFirstNameError(),
                 "Verifying first name error");
 
-            Assert.assertEquals(registrationPage.getLastNameError().getText(),
+            Assert.assertEquals(registrationPage.getLastNameError(),
                 registrationModel.getLastNameError(),
                 "Verifying last name error");
 
-            Assert.assertEquals(registrationPage.getEmailError().getText(),
+            Assert.assertEquals(registrationPage.getEmailError(),
                 registrationModel.getEmailError(),
                 "Verifying Email error");
 
-            Assert.assertEquals(registrationPage.getTelephoneError().getText(),
+            Assert.assertEquals(registrationPage.getTelephoneError(),
                 registrationModel.getTelephoneError(),
                 "Verifying telephone error");
 
-            Assert.assertEquals(registrationPage.getAddress1Error().getText(),
+            Assert.assertEquals(registrationPage.getAddress1Error(),
                 registrationModel.getAddress1Error(),
                 "Verifying address1 error");
 
-            Assert.assertEquals(registrationPage.getCityError().getText(),
+            Assert.assertEquals(registrationPage.getCityError(),
                 registrationModel.getCityError(),
                 "Verifying City error error");
 
-            Assert.assertEquals(registrationPage.getStateError().getText(),
+            Assert.assertEquals(registrationPage.getStateError(),
                 registrationModel.getStateError(),
                 "Verifying City error error");
-            Assert.assertEquals(registrationPage.getPasswordError().getText(),
+
+            Assert.assertEquals(registrationPage.getPasswordError(),
                 registrationModel.getPasswordError(),
                 "Verifying Password error error");
 
+            Assert.assertEquals(registrationPage.getcountry1Error(),
+                registrationModel.getcountry1Error(),
+                "Verifying country error");
 
         } else if(registrationModel.expectSuccessfulRegistration() == true){
-            Assert.assertEquals(welcomePage.getWelcome().isDisplayed(),
+            Assert.assertEquals(welcomePage.getContinueBtn().isDisplayed(),
                 true,
-                "Check if Welcome is displayed");
+                "Check if Continue button is displayed");
         }
 
     }

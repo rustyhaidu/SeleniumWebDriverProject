@@ -1,5 +1,6 @@
 package ro.siit.tau.gr4.pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -46,7 +47,7 @@ public class RegistrationPage {
     @FindBy(how = How.ID, using = "input-password")
     private WebElement password1Field;
 
-    @FindBy(how = How.LINK_TEXT, using = "Password confirmation does not match password!")
+    @FindBy(how = How.ID, using = "input-confirm")
     private WebElement passwordConfirmField;
 
     @FindBy(how = How.XPATH, using = "//input[@name='agree' and @type='checkbox']")
@@ -72,6 +73,9 @@ public class RegistrationPage {
 
     @FindBy(how = How.XPATH, using = "//input[@name='city']/following-sibling::div")
     private WebElement actualCityError;
+
+    @FindBy(how = How.XPATH, using = "//input[@name='country_id']/following-sibling::div")
+    private WebElement actualcountry1Error;
 
     @FindBy(how = How.XPATH, using = "//select[@name='zone_id']/following-sibling::div")
     private WebElement actualStateError;
@@ -113,42 +117,96 @@ public class RegistrationPage {
         postcodeField.clear();
         postcodeField.sendKeys(registrationModel.getPostcode());
 //        country1Field.clear();
-        country1Field.sendKeys(registrationModel.getCountry1());
-//        regionField.clear();
-        regionField.sendKeys(registrationModel.getRegion());
+//        country1Field.sendKeys(registrationModel.getCountry1());
+////        regionField.clear();
+//        regionField.sendKeys(registrationModel.getRegion());
         password1Field.clear();
         password1Field.sendKeys(registrationModel.getPassword());
-//        passwordConfirmField.clear();
-//        passwordConfirmField.sendKeys(registrationModel.getPasswordConfirm());
+        passwordConfirmField.clear();
+        passwordConfirmField.sendKeys(registrationModel.getPasswordConfirm());
 
         agreeButton.click();
         submitButton.click();
 
     }
 
-    public WebElement getFirstNameError() {return actualFirstNameError;}
-
-    public WebElement getLastNameError() {
-        return actualLastNameError;
+    public String getFirstNameError() {
+        try {
+            return actualFirstNameError.getText();
+        } catch (NoSuchElementException e) {
+            return "";
+        }
     }
 
-    public WebElement getEmailError() {
-        return actualEmailError;
+    public String getLastNameError() {
+        try {
+            return actualLastNameError.getText();
+        } catch (NoSuchElementException e) {
+                return  "";
+        }
+
     }
 
-    public WebElement getTelephoneError() {return actualTelephoneError;}
+    public String getEmailError() {
+        try {
+            return actualEmailError.getText();
+        }catch (NoSuchElementException e){
+            return "";
 
-    public WebElement getAddress1Error() {return actualAddress1Error;}
-
-    public WebElement getCityError() {
-        return actualCityError;
+        }
     }
+    public String getTelephoneError() {
+        try {
+            return actualTelephoneError.getText();
+        }catch (NoSuchElementException e){
+            return "";
 
-    public WebElement getStateError() {return actualStateError;}
+        }
+    }
+    public String getAddress1Error() {
+        try {
+            return actualAddress1Error.getText();
+        }catch (NoSuchElementException e){
+            return "";
 
-    public WebElement getPasswordError() {return actualPasswordError;}
+        }
+    }
+    public String getCityError() {
+        try {
+            return actualCityError.getText();
+        }catch (NoSuchElementException e){
+            return "";
 
-    public WebElement getPasswordConfirmError() {return actualPasswordConfirmError;}
+        }
+    }
+    public String getcountry1Error() {
+        try {
+            return actualcountry1Error.getText();
+        }catch (NoSuchElementException e){
+            return "";
+        }
+    }
+    public String getStateError() {
+        try {
+            return actualStateError.getText();
+        }catch (NoSuchElementException e){
+            return "";
+        }
+    }
+    public String getPasswordError() {
+        try {
+            return actualPasswordError.getText();
+        }catch (NoSuchElementException e){
+            return "";
+        }
+    }
+    public String getPasswordConfirmError() {
+        try {
+            return actualPasswordConfirmError.getText();
+        }catch (NoSuchElementException e){
+            return "";
+        }
+    }
 
     public void setCountryRegion(String country, String region) throws InterruptedException {
 
@@ -161,6 +219,7 @@ public class RegistrationPage {
         mm.selectByVisibleText(region);
         //mm.selectByValue(region);
     }
+
 }
 
 

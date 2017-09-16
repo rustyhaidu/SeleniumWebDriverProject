@@ -1,5 +1,7 @@
 package ro.siit.tau.gr4.models;
 
+import java.sql.Timestamp;
+
 public class RegistrationModel {
 
     private String firstName;
@@ -22,6 +24,7 @@ public class RegistrationModel {
     private String telephoneError;
     private String address1Error;
     private String cityError;
+    private String country1Error;
     private String stateError;
     private String passwordError;
 //    private String passwordConfirmError;
@@ -45,9 +48,11 @@ public class RegistrationModel {
     public String getEmail() {
         return email;
     }
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    String ts = timestamp.toString();
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = ts.replaceAll("\\D", "")+email;
     }
 
     public String getTelephone() {
@@ -106,19 +111,25 @@ public class RegistrationModel {
         this.postcode = postcode;
     }
 
-    public String getCountry1() {return country1;}
+    public String getCountry1() {
+        return country1;
+    }
 
     public void setCountry1(String country1) {
         this.country1 = country1;
     }
 
-    public String getRegion() {return region;}
+    public String getRegion() {
+        return region;
+    }
 
     public void setRegion(String region) {
         this.region = region;
     }
 
-    public String getPassword() {return password;}
+    public String getPassword() {
+        return password;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -128,7 +139,9 @@ public class RegistrationModel {
 
     public void setPasswordConfirm(String passwordConfirm) {this.passwordConfirm = passwordConfirm;}
 
-    public String getFirstNameError() {return firstNameError;}
+    public String getFirstNameError() {
+        return firstNameError;
+    }
 
     public void setFirstNameError(String firstNameError) {
         this.firstNameError = firstNameError;
@@ -174,6 +187,15 @@ public class RegistrationModel {
         this.cityError = cityError;
     }
 
+    public void setCountry1Error(String country1Error1) {
+        this.country1Error = country1Error1;
+    }
+
+    public String getcountry1Error() {
+        return country1Error;
+    }
+
+    // de pus country error// si in assert
     public String getStateError() {
         return stateError;
     }
@@ -193,7 +215,6 @@ public class RegistrationModel {
 //    public String getPasswordConfirmError() {return passwordConfirmError;}
 //
 //    public void setPasswordConfirmError(String passwordConfirmError) {this.passwordConfirmError = passwordConfirmError;}
-
 
 
     public boolean expectSuccessfulRegistration() {
@@ -219,14 +240,18 @@ public class RegistrationModel {
         if (!this.stateError.trim().equalsIgnoreCase("")) {
             return false;
         }
-        if (!this.passwordError.trim().equalsIgnoreCase("")) {
-            return false;
+        if (!this.country1Error.trim().equalsIgnoreCase("")) {
+                return false;
         }
+            if (!this.passwordError.trim().equalsIgnoreCase("")) {
+                return false;
+            }
 //        if (!this.passwordConfirmError.trim().equalsIgnoreCase("")) {
 //            return false;
 //        }
             return true;
         }
-}
+    }
+
 
 
