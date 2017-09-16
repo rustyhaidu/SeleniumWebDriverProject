@@ -1,16 +1,12 @@
 package ro.siit.tau.gr4.pages;
 
-
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.ext.WEBGL_compressed_texture_s3tc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ProductPage {
+public class ProductPage extends BasePage{
 
     @FindBy(how = How.ID, using = "button-cart")
     private WebElement addToCartButton;
@@ -29,8 +25,8 @@ public class ProductPage {
         WishList.click();
     }
 
-    public WebElement getAddToCartButton() {
-        return addToCartButton;
+    public void clickAddToCartButton() {
+        addToCartButton.click();
     }
 
     public void setAddToCartButton(WebElement addToCartButton) {
@@ -41,12 +37,33 @@ public class ProductPage {
         return productName;
     }*/
 
-    public WebElement getProductTitle(String product, WebDriver driver){
+    public String getProductTitle(String product, WebDriver driver){
         WebElement productTitle = driver.findElement(By.tagName(product));
-        return productTitle;
+        return productTitle.getText();
     }
 
+    public WebElement getProductInfo(){
+        WebElement productInfo = driver.findElement(By.xpath("//div[@class='col-sm-4' and descendant::h2]"));
+        return productInfo;
+    }
 
+    public String getPrice(){
+        String price = getProductInfo().findElement(By.tagName("h2")).getText();
+        return price;
+    }
 
+    public String getExTaxPrice(){
+        String price = getProductInfo().findElement(By.xpath(".//ul[2]/li/following-sibling::li")).getText();
+        return price;
+    }
 
+    public String getCurrencySymbolFromPrice(){
+        String price = getProductInfo().findElement(By.tagName("h2")).getText();
+        return price.replaceAll("[^£]","");
+    }
+
+    public String getCurrencySymbolFromExTaxPrice(){
+        String price = getProductInfo().findElement(By.xpath(".//ul[2]/li/following-sibling::li")).getText();
+        return price.replaceAll("[^£]","");
+    }
 }
