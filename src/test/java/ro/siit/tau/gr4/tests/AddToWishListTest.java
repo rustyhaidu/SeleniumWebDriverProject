@@ -36,11 +36,11 @@ public class AddToWishListTest extends BaseTest {
         //add product1 to wishList
         productPage.clickAddToWishListButton();
 
-        Assert.assertEquals(homePage.getSuccessMessageText(),
+        Assert.assertEquals(
             new StringBuilder("You must login or create an account to save ")
                 .append(product1)
-                .append(" to your wish list!\n" +
-                    "×").toString(),
+                .append(" to your wish list!").toString(),
+            homePage.getSuccessMessageText().replaceAll("\n.*", "").trim(),
             "check success message");
 
         //go to category and select product 2
@@ -50,11 +50,11 @@ public class AddToWishListTest extends BaseTest {
 
         //add product2 to wishList
         productPage.clickAddToWishListButton();
-        Assert.assertEquals(homePage.getSuccessMessageText(),
+        Assert.assertEquals(
             new StringBuilder("You must login or create an account to save ")
                 .append(product2)
-                .append(" to your wish list!\n" +
-                    "×").toString(),
+                .append(" to your wish list!").toString(),
+            homePage.getSuccessMessageText().replaceAll("\n.*", "").trim(),
             "check success message");
 
         //go to WishList/login
