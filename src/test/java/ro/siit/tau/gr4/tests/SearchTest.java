@@ -10,7 +10,7 @@ import ro.siit.tau.gr4.pages.HomePage;
 
 import java.util.List;
 
-public class SearchTests extends BaseTest {
+public class SearchTest extends BaseTest {
 
     private HomePage homePage;
 
@@ -82,7 +82,7 @@ public class SearchTests extends BaseTest {
         cartTotal = homePage.getTextFromCartTotalButton();
         System.out.println(cartTotal);
 
-        Assert.assertEquals(cartTotal, "4 item(s) - 3,600.00€", "Expected String: item count and total");
+        Assert.assertEquals(cartTotal, "4 item(s) - 3,600.00\u20AC", "Expected String: item count and total");
 
         //Creating a list of prices and getting just values
         List<WebElement> priceList = homePage.getPriceList();
@@ -90,13 +90,13 @@ public class SearchTests extends BaseTest {
         double expectedTotalValue = 0;
         for (WebElement webElement : priceList) {
             //Getting just the first value from the string by Regex
-            itemValue = webElement.getText().replace("\n", "").replaceAll("€Ex.*$", "");
+            itemValue = webElement.getText().replace("\n", "").replaceAll("\\u20ACEx.*$", "");
 
             // Getting the text from the cart button and getting the total value
             expectedTotalValue = expectedTotalValue + Double.parseDouble(itemValue.replace(",", ""));        }
         String cartTotalValue;
         cartTotalValue = cartTotal.substring(cartTotal.indexOf("-")).replace("-", "").trim();
-        cartTotalValue = cartTotalValue.replace(",", "").replace("€", "");
+        cartTotalValue = cartTotalValue.replace(",", "").replace("\u20AC", "");
         double actualTotalValue = Double.parseDouble(cartTotalValue);
 
         Assert.assertEquals(expectedTotalValue, actualTotalValue, "comparing the totals");
