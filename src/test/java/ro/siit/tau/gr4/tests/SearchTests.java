@@ -63,14 +63,15 @@ public class SearchTests extends BaseTest {
             buttonList.get(i).click();
             itemTitle = h4List.get(i).getText();
             Thread.sleep(1000);
-            successMessage = homePage.getSuccessMessageText().replace("×", "").trim();
+            successMessage = homePage.getSuccessMessageText().replaceAll("\n.*", "").trim();
 
             //"Checking that the Success message contains the item added to cart"
-            Assert.assertEquals(successMessage,
+            Assert.assertEquals(
                 new StringBuilder("Success: You have added")
                     .append(" ")
                     .append(itemTitle)
-                    .append(" to your shopping cart!").toString());
+                    .append(" to your shopping cart!").toString(),
+                successMessage);
             //"Success: You have added "+itemTitle+" to your shopping cart!");
         }
         Thread.sleep(1000);
