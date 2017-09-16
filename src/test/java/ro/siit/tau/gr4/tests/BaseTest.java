@@ -23,15 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     public WebDriver driver;
-    public BasePage basePage;
-
-    /*File[] getListOfFiles(String directoryName) {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File directory = new File(classLoader.getResource(directoryName).getFile());
-        File[] files = directory.listFiles();
-        System.out.println("Found " + files.length + " files in " + directoryName + " folder");
-        return files;
-    }*/
+    BasePage basePage;
 
     File[] getListOfFiles(String directoryName) throws URISyntaxException {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -62,44 +54,12 @@ public class BaseTest {
         basePage = PageFactory.initElements(driver, BasePage.class);
         basePage.setDriver(driver);
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get("http://shop-tausandbox.rhcloud.com");
     }
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
         driver.quit();
-    }
-
-
-    /*public void getLinkByHref(String href) {
-        List<WebElement> anchors = driver.findElements(By.tagName("a"));
-        Iterator<WebElement> i = anchors.iterator();
-
-        while (i.hasNext()) {
-            WebElement anchor = i.next();
-            if (anchor.getAttribute("href").contains(href)) {
-                anchor.getText();
-                break;
-            }
-        }
-    }*/
-
-    public List<String> getNameListOfItems(String href) {
-        List<String> nameList = new ArrayList<>();
-        List<WebElement> anchors = driver.findElements(By.tagName("a"));
-        Iterator<WebElement> i = anchors.iterator();
-       // String anchorName;
-        String anchorAttribute;
-        while (i.hasNext()) {
-            WebElement anchor = i.next();
-            anchorAttribute = anchor.getAttribute("href");
-            if (anchorAttribute.contains(href)) {
-               // anchorName = anchor.getText();
-                nameList.add(anchorAttribute);
-            }
-        }
-        return nameList;
-
     }
 }

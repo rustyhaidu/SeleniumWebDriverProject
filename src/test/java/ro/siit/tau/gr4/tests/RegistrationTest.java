@@ -28,24 +28,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class RegistrationTest extends BaseTest {
 
-    File[] getListOfFiles(String directoryName) throws URISyntaxException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL path = classLoader.getResource(directoryName);
-        String configPath = null;
-
-        try {
-            configPath = URLDecoder.decode(path.getFile(), "UTF-8");
-            System.out.println(configPath);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        File directory = new File(configPath);
-
-        File[] files = directory.listFiles();
-        System.out.println("Found " + files.length + " files in " + directoryName + " folder");
-        return files;
-    }
-
     @DataProvider(name = "JSONDataProviderRegistration")
     public Iterator<Object[]> jsonDataProviderCollection() throws URISyntaxException {
         Collection<Object[]> dp = new ArrayList<>();
