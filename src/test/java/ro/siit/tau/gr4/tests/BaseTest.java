@@ -54,7 +54,7 @@ public class BaseTest {
         basePage = PageFactory.initElements(driver, BasePage.class);
         basePage.setDriver(driver);
 
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://shop-tausandbox.rhcloud.com");
     }
 
