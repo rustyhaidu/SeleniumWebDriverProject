@@ -27,7 +27,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
+
                 <configuration>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>
+                                ro.siit.tau.gr4.reports.TestListener,ro.siit.tau.gr4.reports.TestReporter
+                            </value>
+                        </property>
+
+                    </properties>
+
                     <systemPropertyVariables>
                         <reportPath>${reports-path}</reportPath>
                         <testOutputPath>${test-output-path}</testOutputPath>
@@ -72,5 +83,18 @@
             <artifactId>testng</artifactId>
             <version>6.11</version>
         </dependency>
+        <dependency>
+            <groupId>org.uncommons</groupId>
+            <artifactId>reportng</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
 </project>

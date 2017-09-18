@@ -34,7 +34,7 @@ public class CompareProductsTest extends BaseTest {
         homePage.searchItem(" ");
 
         // Get the list of all products
-        List<String> itemTitles = new LinkedList<>();
+        List<String> itemTitles = new ArrayList<>();
 
         for (int i = 0; i < arrayOfItems.length - 1; i++) {
             String itemTitle = addProductToCompareTable(arrayOfItems[i], itemTitles);
