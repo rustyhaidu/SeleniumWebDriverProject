@@ -7,6 +7,10 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Select;
 import ro.siit.tau.gr4.models.RegistrationModel;
 
+import java.util.concurrent.TimeUnit;
+
+import static ro.siit.tau.gr4.pages.BasePage.driver;
+
 public class RegistrationPage {
     @FindBy(how = How.ID, using = "input-firstname")
     private WebElement firstNameField;
@@ -90,11 +94,12 @@ public class RegistrationPage {
     @FindBy(how = How.LINK_TEXT, using = "Register")
     private WebElement registerButton;
 
-    public void click_on_register(){
+    public void click_on_register() {
         myAccount.click();
         registerButton.click();
 
     }
+
     public void register(RegistrationModel registrationModel) {
         firstNameField.clear();
         firstNameField.sendKeys(registrationModel.getFirstName());
@@ -139,72 +144,102 @@ public class RegistrationPage {
     }
 
     public String getLastNameError() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         try {
             return actualLastNameError.getText();
         } catch (NoSuchElementException e) {
-                return  "";
+            return "";
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
 
     }
 
     public String getEmailError() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         try {
             return actualEmailError.getText();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
-
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
     }
+
     public String getTelephoneError() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         try {
             return actualTelephoneError.getText();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
-
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
     }
+
     public String getAddress1Error() {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         try {
             return actualAddress1Error.getText();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
-
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
     }
+
     public String getCityError() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         try {
             return actualCityError.getText();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
-
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
     }
+
     public String getcountry1Error() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         try {
             return actualcountry1Error.getText();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
     }
+
     public String getStateError() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         try {
             return actualStateError.getText();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
     }
+
     public String getPasswordError() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         try {
             return actualPasswordError.getText();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
     }
+
     public String getPasswordConfirmError() {
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         try {
             return actualPasswordConfirmError.getText();
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return "";
+        } finally {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }
     }
 
